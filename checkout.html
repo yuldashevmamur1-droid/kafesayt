@@ -1,0 +1,2406 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOIR & BEAN — Savat, Rasmiylashtirish va Buyurtmalar Tarixi</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <!-- RemixIcon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. SENIOR DESIGN SYSTEM & CSS TOKENS (DARK / LIGHT MODE)
+       ========================================================================== */
+    :root {
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --accent-primary: #d4a373;
+      --accent-primary-hover: #e6b88a;
+      --accent-secondary: #bc6c25;
+      --accent-glow: rgba(212, 163, 115, 0.25);
+
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.14);
+      --success: #10b981;
+      --success-soft: rgba(16, 185, 129, 0.14);
+      --warning: #f59e0b;
+      --info: #3b82f6;
+
+      --radius-xs: 8px;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --radius-xl: 36px;
+      --radius-full: 9999px;
+
+      --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-smooth: 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      --container-width: 1380px;
+    }
+
+    html[data-theme="dark"] {
+      --bg-main: #0b0908;
+      --bg-elevated: #14110f;
+      --bg-card: #1a1614;
+      --bg-card-hover: #231e1b;
+      --bg-glass: rgba(20, 17, 15, 0.86);
+      --bg-input: #110e0c;
+
+      --text-primary: #f9f6f0;
+      --text-secondary: #b8afa6;
+      --text-muted: #7d736a;
+
+      --border-subtle: rgba(255, 248, 240, 0.08);
+      --border-strong: rgba(212, 163, 115, 0.32);
+
+      --shadow-card: 0 18px 42px -12px rgba(0, 0, 0, 0.65);
+      --shadow-floating: 0 28px 65px -10px rgba(0, 0, 0, 0.85);
+    }
+
+    html[data-theme="light"] {
+      --bg-main: #faf6f0;
+      --bg-elevated: #f2ece1;
+      --bg-card: #ffffff;
+      --bg-card-hover: #fdfbf7;
+      --bg-glass: rgba(250, 246, 240, 0.88);
+      --bg-input: #f4efe6;
+
+      --text-primary: #1c1613;
+      --text-secondary: #5c5149;
+      --text-muted: #8c7f75;
+
+      --border-subtle: rgba(28, 22, 19, 0.09);
+      --border-strong: rgba(188, 108, 37, 0.35);
+
+      --shadow-card: 0 14px 34px -10px rgba(28, 22, 19, 0.08);
+      --shadow-floating: 0 24px 56px -12px rgba(28, 22, 19, 0.16);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color var(--transition-smooth), color var(--transition-smooth);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      background: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-main);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-secondary);
+      border-radius: var(--radius-full);
+    }
+
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: #0b0908;
+      font-weight: 800;
+      padding: 15px 28px;
+      border-radius: var(--radius-full);
+      font-size: 0.95rem;
+      box-shadow: 0 10px 26px var(--accent-glow);
+      transition: var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      font-weight: 700;
+      padding: 12px 22px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      transition: var(--transition-fast);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       3. TOPBAR & STICKY HEADER
+       ========================================================================== */
+    .topbar {
+      background: linear-gradient(90deg, #1f1712 0%, #2c1e16 50%, #1f1712 100%);
+      color: #f9f6f0;
+      font-size: 0.82rem;
+      border-bottom: 1px solid rgba(212, 163, 115, 0.18);
+      padding: 9px 0;
+      position: relative;
+      z-index: 100;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .topbar-left, .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .topbar-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #e6dcd2;
+    }
+
+    .topbar-item i {
+      color: var(--accent-primary);
+      font-size: 1rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      display: inline-block;
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.65; }
+    }
+
+    .promo-pill {
+      background: rgba(212, 163, 115, 0.2);
+      border: 1px dashed var(--accent-primary);
+      color: var(--accent-primary);
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .promo-pill:hover {
+      background: var(--accent-primary);
+      color: #0b0908;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 95;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b0908;
+      font-size: 1.5rem;
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .brand-subtitle {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent-primary);
+      margin-top: 3px;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-elevated);
+      padding: 6px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .nav-link {
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link.active {
+      background: var(--accent-primary);
+      color: #0b0908;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 3px;
+    }
+
+    .lang-btn {
+      padding: 5px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: var(--transition-fast);
+    }
+
+    .lang-btn.active {
+      background: var(--bg-card);
+      color: var(--accent-primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon-btn {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      transition: var(--transition-fast);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+
+    .badge-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      border-radius: var(--radius-full);
+      background: var(--danger);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-main);
+    }
+
+    /* ==========================================================================
+       4. CHECKOUT HERO & FREE SHIPPING PROGRESS BAR
+       ========================================================================== */
+    .checkout-header-strip {
+      padding: 40px 0 30px;
+      background: radial-gradient(circle at 85% 20%, rgba(212, 163, 115, 0.14), transparent 55%),
+                  var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .checkout-header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .checkout-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.1rem, 3.6vw, 3.1rem);
+      line-height: 1.1;
+    }
+
+    .checkout-title span {
+      color: var(--accent-primary);
+      font-style: italic;
+    }
+
+    .free-shipping-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 18px 24px;
+      min-width: 380px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .shipping-progress-track {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .shipping-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--success));
+      border-radius: var(--radius-full);
+      transition: width 0.4s ease;
+    }
+
+    /* ==========================================================================
+       5. MAIN CHECKOUT 2-COLUMN WORKSPACE
+       ========================================================================== */
+    .checkout-workspace {
+      padding: 48px 0 72px;
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .checkout-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      margin-bottom: 28px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .panel-head h3 {
+      font-family: var(--font-display);
+      font-size: 1.65rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .panel-head h3 i {
+      color: var(--accent-primary);
+    }
+
+    /* Cart Items Table inside Checkout */
+    .checkout-cart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .checkout-cart-row {
+      display: grid;
+      grid-template-columns: 80px 1fr auto auto auto;
+      gap: 18px;
+      align-items: center;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      transition: var(--transition-fast);
+    }
+
+    .checkout-cart-row:hover {
+      border-color: var(--border-strong);
+    }
+
+    .checkout-cart-row img {
+      width: 80px;
+      height: 80px;
+      border-radius: var(--radius-sm);
+    }
+
+    .row-info h4 {
+      font-size: 1.02rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .row-info span {
+      font-size: 0.78rem;
+      color: var(--accent-primary);
+      font-weight: 700;
+      background: rgba(212, 163, 115, 0.14);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .qty-control-lg {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 6px 12px;
+    }
+
+    .qty-control-lg button {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+    }
+
+    .qty-control-lg button:hover {
+      background: var(--accent-primary);
+      color: #0b0908;
+    }
+
+    .row-total-price {
+      font-size: 1.08rem;
+      font-weight: 800;
+      min-width: 115px;
+      text-align: right;
+    }
+
+    /* Fulfillment Mode Tabs (Delivery / Pickup / Dine-in) */
+    .fulfillment-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .fulfill-tab {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: left;
+      transition: var(--transition-fast);
+    }
+
+    .fulfill-tab.active {
+      background: rgba(212, 163, 115, 0.14);
+      border-color: var(--accent-primary);
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    .fulfill-tab i {
+      font-size: 1.4rem;
+      color: var(--accent-primary);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .fulfill-tab strong {
+      display: block;
+      font-size: 0.92rem;
+      margin-bottom: 2px;
+    }
+
+    .fulfill-tab span {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .form-control {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      transition: var(--transition-fast);
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    /* Payment Cards Grid */
+    .payment-methods-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .pay-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .pay-card.active {
+      border-color: var(--accent-primary);
+      background: rgba(212, 163, 115, 0.14);
+    }
+
+    .pay-card i {
+      font-size: 1.5rem;
+      color: var(--accent-primary);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .pay-card strong {
+      font-size: 0.84rem;
+      display: block;
+    }
+
+    /* Barista Tip Pills */
+    .tip-pills {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .tip-pill {
+      padding: 11px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-align: center;
+      transition: var(--transition-fast);
+    }
+
+    .tip-pill.active {
+      background: var(--accent-primary);
+      color: #0b0908;
+      border-color: var(--accent-primary);
+    }
+
+    /* Sticky Right Order Summary Sidebar */
+    .order-summary-sidebar {
+      position: sticky;
+      top: 104px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-floating);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .summary-row strong {
+      color: var(--text-primary);
+    }
+
+    .summary-row.grand-total {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 2px dashed var(--border-strong);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .summary-row.grand-total strong {
+      color: var(--accent-primary);
+      font-size: 1.5rem;
+    }
+
+    /* ==========================================================================
+       6. IMPULSE UPSELL / CHECKOUT ADD-ONS (8 ITEMS WITH LIKE ❤️ & CART)
+       ========================================================================== */
+    .upsell-section {
+      padding: 20px 0 76px;
+    }
+
+    .upsell-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-card);
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-strong);
+    }
+
+    .product-media {
+      position: relative;
+      height: 195px;
+      overflow: hidden;
+    }
+
+    .product-media img {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+    }
+
+    .product-card:hover .product-media img {
+      transform: scale(1.07);
+    }
+
+    .badge-tag {
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .badge-hit { background: rgba(212, 163, 115, 0.94); color: #0b0908; }
+    .badge-new { background: rgba(16, 185, 129, 0.94); color: #ffffff; }
+
+    .product-badges {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+    }
+
+    .product-actions-top {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+    }
+
+    .like-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(15, 12, 10, 0.74);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      transition: var(--transition-fast);
+    }
+
+    .like-btn.liked {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: #ffffff;
+    }
+
+    .product-body {
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .product-desc {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .add-cart-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--text-primary);
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: var(--transition-fast);
+    }
+
+    .add-cart-btn:hover {
+      background: var(--accent-primary);
+      color: #0b0908;
+    }
+
+    /* ==========================================================================
+       7. PAST ORDERS HISTORY TABLE (LOCALSTORAGE PERSISTENT)
+       ========================================================================== */
+    .history-section {
+      padding: 64px 0;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .history-table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .history-table th, .history-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .history-table th {
+      color: var(--accent-primary);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(212, 163, 115, 0.06);
+    }
+
+    /* ==========================================================================
+       8. DIGITAL FISCAL RECEIPT MODAL & WISHLIST DRAWER
+       ========================================================================== */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.74);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+
+    .backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 450px;
+      height: 100vh;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-strong);
+      z-index: 210;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(102%);
+      transition: transform var(--transition-smooth);
+    }
+
+    .drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .drawer-item {
+      display: flex;
+      gap: 14px;
+      background: var(--bg-elevated);
+      padding: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      align-items: center;
+    }
+
+    .drawer-item img {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-sm);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 230;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .receipt-paper {
+      background: #fffdf9;
+      color: #181412;
+      width: 100%;
+      max-width: 440px;
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.85);
+      font-family: var(--font-mono);
+      position: relative;
+    }
+
+    .receipt-paper h3 {
+      text-align: center;
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+
+    .receipt-divider {
+      border-top: 1px dashed #8c7f75;
+      margin: 14px 0;
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent-primary);
+      border-top: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-floating);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .footer {
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+      padding: 56px 0 28px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 1120px) {
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+      .order-summary-sidebar {
+        position: static;
+      }
+      .upsell-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links {
+        display: none;
+      }
+      .fulfillment-tabs,
+      .payment-methods-grid,
+      .tip-pills,
+      .upsell-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .checkout-cart-row {
+        grid-template-columns: 64px 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP ANNOUNCEMENT BAR
+       ======================================================================== -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span class="topbar-item">
+          <span class="status-dot"></span>
+          <span data-i18n="topbar_open">Telegram Bot Orqali Rasmiylashtirish Faol (24/7)</span>
+        </span>
+        <span class="topbar-item">
+          <i class="ri-shield-keyhole-fill"></i>
+          <span data-i18n="topbar_sec">256-Bit SSL & 3D Secure To‘lov Himoyasi</span>
+        </span>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-item">
+          <i class="ri-gift-2-fill"></i>
+          <span data-i18n="topbar_promo">15% chegirma promo-kodi:</span>
+          <button class="promo-pill" onclick="copyPromoCode('AZ1K15')">AZ1K15</button>
+        </span>
+        <a href="tel:+998712007788" class="topbar-item">
+          <i class="ri-phone-fill"></i> +998 (71) 200-77-88
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       STICKY HEADER & MULTI-PAGE NAVIGATION
+       ======================================================================== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon"><i class="ri-cup-fill"></i></div>
+        <div class="brand-text">
+          <span class="brand-title">NOIR & BEAN</span>
+          <span class="brand-subtitle">Roastery & Online Store</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">
+          <i class="ri-home-5-line"></i>
+          <span data-i18n="nav_home">Bosh sahifa</span>
+        </a>
+        <a href="menu.html" class="nav-link">
+          <i class="ri-restaurant-2-line"></i>
+          <span data-i18n="nav_menu">Katalog & Menyu</span>
+        </a>
+        <a href="about.html" class="nav-link">
+          <i class="ri-store-3-line"></i>
+          <span data-i18n="nav_about">Kafe haqida & Filiallar</span>
+        </a>
+        <a href="checkout.html" class="nav-link active">
+          <i class="ri-shopping-bag-3-line"></i>
+          <span data-i18n="nav_checkout">Rasmiylashtirish</span>
+        </a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">UZ</button>
+          <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+          <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
+
+        <button class="icon-btn" onclick="toggleTheme()" title="Dark / Light Mode">
+          <i class="ri-sun-line" id="themeIcon"></i>
+        </button>
+
+        <button class="icon-btn" onclick="openWishlistDrawer()" title="Saqlangan tovarlar">
+          <i class="ri-heart-3-line"></i>
+          <span class="badge-count" id="wishlistBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       CHECKOUT HERO & FREE SHIPPING PROGRESS BAR
+       ======================================================================== -->
+  <section class="checkout-header-strip">
+    <div class="container checkout-header-flex">
+      <div>
+        <span style="color:var(--accent-primary); font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.14em;" data-i18n="chk_kicker">
+          Step 4/4 • Express Order Dispatch
+        </span>
+        <h1 class="checkout-title" data-i18n="chk_title">
+          Savat va <span>Telegram Bot</span> Orqali Rasmiylashtirish
+        </h1>
+      </div>
+
+      <div class="free-shipping-box">
+        <div style="display:flex; justify-content:space-between; font-size:0.84rem; font-weight:700;">
+          <span id="freeShipStatusText">🛵 Bepul yetkazishgacha: 150,000 UZS</span>
+          <strong style="color:var(--accent-primary);" id="freeShipPercentText">0%</strong>
+        </div>
+        <div class="shipping-progress-track">
+          <div class="shipping-progress-fill" id="freeShipProgressFill"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       MAIN 2-COLUMN CHECKOUT WORKSPACE
+       ======================================================================== -->
+  <section class="checkout-workspace">
+    <div class="container checkout-grid">
+
+      <!-- LEFT COLUMN: CART ITEMS + DELIVERY DETAILS + PAYMENT -->
+      <div>
+
+        <!-- PANEL 1: SAVATDAGI TOVARLAR -->
+        <div class="checkout-panel">
+          <div class="panel-head">
+            <h3>
+              <i class="ri-shopping-basket-2-fill"></i>
+              <span data-i18n="panel_1_title">1. Savatingizdagi Mahsulotlar</span>
+            </h3>
+            <button class="btn-outline" style="padding:7px 14px; font-size:0.78rem;" onclick="clearEntireCart()">
+              <i class="ri-delete-bin-line"></i> Savatni tozalash
+            </button>
+          </div>
+
+          <div class="checkout-cart-list" id="checkoutCartList"></div>
+        </div>
+
+        <!-- PANEL 2: QABUL QILISH USULI VA TOSHKENT TUMANLARI KALKULYATORI -->
+        <div class="checkout-panel">
+          <div class="panel-head">
+            <h3>
+              <i class="ri-map-pin-user-fill"></i>
+              <span data-i18n="panel_2_title">2. Qabul Qilish Usuli va Manzil</span>
+            </h3>
+          </div>
+
+          <div class="fulfillment-tabs">
+            <button type="button" class="fulfill-tab active" id="tabDelivery" onclick="setFulfillmentMode('delivery')">
+              <i class="ri-motorbike-fill"></i>
+              <strong data-i18n="mode_del_title">Kuryer Orqali Yetkazish</strong>
+              <span data-i18n="mode_del_sub">Toshkent bo‘ylab 25–35 daqiqa</span>
+            </button>
+            <button type="button" class="fulfill-tab" id="tabPickup" onclick="setFulfillmentMode('pickup')">
+              <i class="ri-walk-fill"></i>
+              <strong data-i18n="mode_pick_title">Olib Ketish (-5% Bonus)</strong>
+              <span data-i18n="mode_pick_sub">Filial yoki Drive-Thru orqali</span>
+            </button>
+            <button type="button" class="fulfill-tab" id="tabDinein" onclick="setFulfillmentMode('dinein')">
+              <i class="ri-cup-fill"></i>
+              <strong data-i18n="mode_dine_title">Kafeda Stolga Buyurtma</strong>
+              <span data-i18n="mode_dine_sub">Kelishingizga tayyor turadi</span>
+            </button>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label data-i18n="lbl_name">Mijoz ismi va familiyasi *</label>
+              <input type="text" id="chkCustomerName" class="form-control" placeholder="Masalan: Az1k" required />
+            </div>
+            <div class="form-group">
+              <label data-i18n="lbl_phone">Telefon raqamingiz (Telegram ulangan) *</label>
+              <input type="tel" id="chkCustomerPhone" class="form-control" placeholder="+998 90 123 45 67" required />
+            </div>
+
+            <!-- Dynamic District / Branch Selector -->
+            <div class="form-group" id="districtGroupWrap">
+              <label data-i18n="lbl_district">Toshkent tumanini tanlang (Yetkazish kalkulyatori) *</label>
+              <select id="chkDistrictSelect" class="form-control" onchange="recalculateTotals()">
+                <option value="12000|22 daq|Shayxontohur tumani">Shayxontohur tumani (22 daq • 12,000 UZS)</option>
+                <option value="12000|20 daq|Tashkent City / Markaz">Tashkent City / Markaz (20 daq • 12,000 UZS)</option>
+                <option value="15000|26 daq|Yunusobod tumani">Yunusobod tumani (26 daq • 15,000 UZS)</option>
+                <option value="15000|28 daq|Chilonzor tumani">Chilonzor tumani (28 daq • 15,000 UZS)</option>
+                <option value="15000|25 daq|Yakkasaroy tumani">Yakkasaroy tumani (25 daq • 15,000 UZS)</option>
+                <option value="16000|29 daq|Mirzo Ulug'bek tumani">Mirzo Ulug‘bek tumani (29 daq • 16,000 UZS)</option>
+                <option value="15000|25 daq|Sergeli tumani">Sergeli tumani (25 daq • 15,000 UZS)</option>
+                <option value="16000|30 daq|Olmazor tumani">Olmazor tumani (30 daq • 16,000 UZS)</option>
+                <option value="18000|32 daq|Uchtepa tumani">Uchtepa tumani (32 daq • 18,000 UZS)</option>
+                <option value="18000|33 daq|Mirobod tumani">Mirobod tumani (33 daq • 18,000 UZS)</option>
+                <option value="20000|35 daq|Yashnobod tumani">Yashnobod tumani (35 daq • 20,000 UZS)</option>
+                <option value="22000|38 daq|Bektemir / Yangihayot">Bektemir / Yangihayot (38 daq • 22,000 UZS)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="lbl_time">Yetkazish / Tayyor bo‘lish vaqti *</label>
+              <select id="chkTimeSlot" class="form-control">
+                <option value="Darhol (Tezkor Express)">⚡ Darhol (Tezkor Express — 25 daqiqada)</option>
+                <option value="Soat 09:00 ga (Ertalabki nonushta)">🕘 Soat 09:00 ga</option>
+                <option value="Soat 13:00 ga (Tushlik vaqti)">🕐 Soat 13:00 ga</option>
+                <option value="Soat 19:00 ga (Kechki payt)">🕖 Soat 19:00 ga</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label id="addressLabelDynamic" data-i18n="lbl_addr">Aniq manzil (Ko‘cha, uy, pod’ezd, qavat) yoki Filial *</label>
+              <input
+                type="text"
+                id="chkAddressInput"
+                class="form-control"
+                placeholder="Masalan: Navoiy ko'chasi 18-uy, 2-pod'ezd, 45-xonadon"
+                required
+              />
+            </div>
+
+            <div class="form-group full">
+              <label data-i18n="lbl_comment">Barista va Kuryer uchun maxsus istaklar</label>
+              <input
+                type="text"
+                id="chkOrderNotes"
+                class="form-control"
+                placeholder="Masalan: Qahva juda issiq bo'lsin, domofon kodi 45#, 2 ta salfetka qo'shing..."
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 3: TO'LOV USULI VA BARISTA CHOYCHAQASI (TIP) -->
+        <div class="checkout-panel">
+          <div class="panel-head">
+            <h3>
+              <i class="ri-bank-card-2-fill"></i>
+              <span data-i18n="panel_3_title">3. To‘lov Turi va Barista Choychaqasi</span>
+            </h3>
+          </div>
+
+          <div class="payment-methods-grid">
+            <div class="pay-card active" onclick="selectPaymentMethod('Click Up / QR', this)">
+              <i class="ri-smartphone-line"></i>
+              <strong>CLICK Up</strong>
+              <span style="font-size:0.72rem; color:var(--text-muted);">Avto-hisob / QR</span>
+            </div>
+            <div class="pay-card" onclick="selectPaymentMethod('Payme GO', this)">
+              <i class="ri-wallet-3-line"></i>
+              <strong>Payme GO</strong>
+              <span style="font-size:0.72rem; color:var(--text-muted);">Tezkor havola</span>
+            </div>
+            <div class="pay-card" onclick="selectPaymentMethod('Uzcard / Humo Terminal', this)">
+              <i class="ri-bank-card-line"></i>
+              <strong>Uzcard / Humo</strong>
+              <span style="font-size:0.72rem; color:var(--text-muted);">Kuryer terminalida</span>
+            </div>
+            <div class="pay-card" onclick="selectPaymentMethod('Naqd pul', this)">
+              <i class="ri-money-dollar-circle-line"></i>
+              <strong>Naqd Pul</strong>
+              <span style="font-size:0.72rem; color:var(--text-muted);">Qabul qilganda</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 18px;">
+            <label style="font-size:0.82rem; font-weight:700; color:var(--text-secondary); display:block; margin-bottom:10px;">
+              ☕️ Barista va Kuryer uchun choychaqa (Tip — ixtiyoriy):
+            </label>
+            <div class="tip-pills">
+              <button type="button" class="tip-pill active" onclick="selectTipAmount(0, this)">Yo‘q (0 UZS)</button>
+              <button type="button" class="tip-pill" onclick="selectTipAmount(5000, this)">+5,000 UZS ☕️</button>
+              <button type="button" class="tip-pill" onclick="selectTipAmount(10000, this)">+10,000 UZS 🔥</button>
+              <button type="button" class="tip-pill" onclick="selectTipAmount(20000, this)">+20,000 UZS 👑</button>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:18px; flex-wrap:wrap; padding-top:14px; border-top:1px solid var(--border-subtle); font-size:0.85rem;">
+            <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;">
+              <input type="checkbox" id="chkEcoCutlery" checked style="accent-color:var(--accent-primary); width:16px; height:16px;" />
+              <span>🌿 Yog‘och sanchqi/qoshiq va salfetkalar qo‘shilsin (Bepul)</span>
+            </label>
+            <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer;">
+              <input type="checkbox" id="chkCallConfirm" checked style="accent-color:var(--accent-primary); width:16px; height:16px;" />
+              <span>📞 Operator qo‘ng‘iroq qilib tasdiqlasin</span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN: STICKY FINANCIAL SUMMARY & TELEGRAM BOT SUBMIT -->
+      <aside class="order-summary-sidebar">
+        <h3 style="font-family:var(--font-display); font-size:1.75rem; margin-bottom:16px;">
+          <i class="ri-file-list-3-fill" style="color:var(--accent-primary);"></i>
+          <span data-i18n="sum_heading">To‘lov Xulosasi</span>
+        </h3>
+
+        <!-- Promo Code Input -->
+        <div style="display:flex; gap:8px; margin-bottom:20px;">
+          <input
+            type="text"
+            id="chkPromoInput"
+            class="form-control"
+            style="flex:1; padding:10px 14px;"
+            placeholder="Promo-kod: AZ1K15 yoki NOIR20"
+          />
+          <button type="button" class="btn-outline" style="padding:10px 16px;" onclick="applyCheckoutPromo()">
+            Qo‘llash
+          </button>
+        </div>
+
+        <div class="summary-row">
+          <span data-i18n="sum_items">Mahsulotlar soni:</span>
+          <strong id="sumItemsCount">0 ta</strong>
+        </div>
+        <div class="summary-row">
+          <span data-i18n="sum_subtotal">Tovarlar summasi:</span>
+          <strong id="sumSubtotal">0 UZS</strong>
+        </div>
+        <div class="summary-row">
+          <span data-i18n="sum_pickup_bonus">Pickup / Promo chegirma:</span>
+          <strong id="sumDiscount" style="color:var(--success);">-0 UZS</strong>
+        </div>
+        <div class="summary-row">
+          <span data-i18n="sum_delivery">Yetkazib berish (<span id="sumEtaText">22 daq</span>):</span>
+          <strong id="sumDelivery">12,000 UZS</strong>
+        </div>
+        <div class="summary-row">
+          <span data-i18n="sum_tip">Barista choychaqasi:</span>
+          <strong id="sumTip">0 UZS</strong>
+        </div>
+
+        <div class="summary-row grand-total">
+          <span data-i18n="sum_total">Jami to‘lov:</span>
+          <strong id="sumGrandTotal">0 UZS</strong>
+        </div>
+
+        <button
+          type="button"
+          class="btn-primary"
+          id="finalTelegramOrderBtn"
+          style="width:100%; justify-content:center; margin-top:22px; padding:16px;"
+          onclick="dispatchFinalOrderToTelegram()"
+        >
+          <i class="ri-telegram-fill" style="font-size:1.3rem;"></i>
+          <span data-i18n="btn_send_bot">Buyurtmani Telegram Botga Yuborish</span>
+        </button>
+
+        <div style="margin-top:16px; text-align:center; font-size:0.76rem; color:var(--text-muted);">
+          <i class="ri-lock-2-line" style="color:var(--accent-primary);"></i>
+          Buyurtma bosilishi bilan ma’lumotlar real vaqtda <b>ID: 8731329676</b> Telegram botiga tushadi va elektron chek shakllanadi.
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       IMPULSE UPSELL / CHECKOUT ADD-ONS (8 UNIQUE PRODUCTS WITH LIKE ❤️ & CART)
+       ======================================================================== -->
+  <section class="upsell-section">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:28px; flex-wrap:wrap; gap:14px;">
+        <div>
+          <span style="color:var(--accent-primary); font-size:0.76rem; font-weight:700; text-transform:uppercase; letter-spacing:0.15em;">
+            Kassa Oldi Shirinliklar va Qo‘shimchalar
+          </span>
+          <h2 style="font-family:var(--font-display); font-size:2.2rem;" data-i18n="upsell_title">
+            Buyurtmangizga Shirinlik yoki Siroplar Qo‘shing
+          </h2>
+        </div>
+      </div>
+
+      <div class="upsell-grid" id="upsellGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       ORDER HISTORY TABLE (SAVED IN LOCALSTORAGE)
+       ========================================================================== -->
+  <section class="history-section">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
+        <div>
+          <span style="color:var(--accent-primary); font-size:0.76rem; font-weight:700; text-transform:uppercase; letter-spacing:0.15em;">
+            LocalStorage Order Tracker
+          </span>
+          <h2 style="font-family:var(--font-display); font-size:2rem;" data-i18n="hist_title">
+            Mening Yuborgan Buyurtmalarim Tarixi
+          </h2>
+        </div>
+        <button class="btn-outline" style="padding:8px 16px; font-size:0.8rem;" onclick="clearOrderHistory()">
+          Tarixni tozalash
+        </button>
+      </div>
+
+      <div class="history-table-wrap">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Buyurtma ID</th>
+              <th>Sana va Vaqt</th>
+              <th>Mijoz & Usul</th>
+              <th>Tovarlar</th>
+              <th>Jami Summa</th>
+              <th>Holati</th>
+            </tr>
+          </thead>
+          <tbody id="orderHistoryTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 NOIR & BEAN Roastery. Sahifa 4/4 (checkout.html) — To‘liq E-Commerce Arxitekturasi.</span>
+        <div style="display:flex; gap:16px;">
+          <a href="index.html">1. Bosh sahifa</a>
+          <a href="menu.html">2. Katalog</a>
+          <a href="about.html">3. Kafe haqida</a>
+          <a href="checkout.html" style="color:var(--accent-primary);">4. Rasmiylashtirish</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       BACKDROP, WISHLIST DRAWER & PRINTABLE FISCAL RECEIPT MODAL
+       ======================================================================== -->
+  <div class="backdrop" id="globalBackdrop" onclick="closeModals()"></div>
+
+  <aside class="drawer" id="wishlistDrawer">
+    <div class="drawer-header">
+      <h3 style="font-family:var(--font-display); font-size:1.5rem;">
+        <i class="ri-heart-3-fill" style="color:var(--danger);"></i>
+        <span data-i18n="wishlist_title">Saqlangan Tovarlar</span>
+      </h3>
+      <button class="icon-btn" onclick="closeModals()"><i class="ri-close-line"></i></button>
+    </div>
+    <div class="drawer-body" id="wishlistItemsContainer"></div>
+  </aside>
+
+  <!-- Printable Fiscal Receipt Modal -->
+  <div class="modal" id="receiptModal">
+    <div class="receipt-paper" id="receiptPaperContent"></div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ========================================================================
+       SENIOR JAVASCRIPT ENGINE FOR CHECKOUT.HTML
+       ======================================================================== -->
+  <script>
+    const TELEGRAM_BOT_TOKEN = "9278006127:AAHIwnV9rNLtlZmPNmWrhVTBeFHKMSjY3dE";
+    const TELEGRAM_CHAT_ID = "8731329676";
+
+    /* ========================================================================
+       1. 8 IMPULSE UPSELL ITEMS (100% UNIQUE UNSPLASH IMAGES)
+       ======================================================================== */
+    const UPSELL_DB = [
+      {
+        id: "nb-301",
+        badge: "hit",
+        price: 45000,
+        image: "https://images.unsplash.com/photo-1569864358642-9d1684040f43?auto=format&fit=crop&w=600&q=80",
+        title: {
+          uz: "Fransuz Makaronlar Qutisi (5 xil ta’m)",
+          ru: "Набор Французских Макарон (5 вкусов)",
+          en: "Parisian Macaron Gift Box (5 Flavors)"
+        },
+        desc: {
+          uz: "Pista, malina, tuzli karamel, vanil va belgiya shokoladli bodom makaronlari.",
+          ru: "Миндальные пирожные макарон: фисташка, малина, соленая карамель и шоколад.",
+          en: "Almond meringue macarons: pistachio, raspberry, salted caramel, and dark chocolate."
+        }
+      },
+      {
+        id: "nb-302",
+        badge: "new",
+        price: 38000,
+        image: "https://images.unsplash.com/photo-1548907040-4baa42d10919?auto=format&fit=crop&w=600&q=80",
+        title: {
+          uz: "Belgiya Qo‘lbola Trufel Konfetlari (6 dona)",
+          ru: "Бельгийские трюфели ручной работы (6 шт)",
+          en: "Hand-Rolled Belgian Dark Truffles (6 pcs)"
+        },
+        desc: {
+          uz: "Espresso bilan birga tanovul qilish uchun 70% Callebaut shokoladidan tayyorlangan trufellar.",
+          ru: "Крафтовые трюфели из темного шоколада Callebaut 70% с какао-пудрой.",
+          en: "Artisanal 70% dark chocolate ganache truffles dusted in Dutch cocoa powder."
+        }
+      },
+      {
+        id: "nb-303",
+        badge: "hit",
+        price: 24000,
+        image: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80",
+        title: {
+          uz: "Italiya Bodomli Kantuççi Biskottisi",
+          ru: "Итальянское миндальное печенье Кантуччи",
+          en: "Tuscan Roasted Almond Biscotti Pack"
+        },
+        desc: {
+          uz: "Kapuchino va Amerikano ichiga botirib yeyish uchun qarsildoq qovurilgan bodomli pechenye.",
+          ru: "Хрустящее тосканское печенье с цельным жареным миндалем к кофе.",
+          en: "Twice-baked crunchy Tuscan cookies loaded with whole roasted almonds."
+        }
+      },
+      {
+        id: "nb-304",
+        badge: "new",
+        price: 42000,
+        image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80",
+        title: {
+          uz: "Shishali Cold Brew Concentrate (250 ml)",
+          ru: "Колд Брю Концентрат в стекле (250 мл)",
+          en: "Bottled Cold Brew Coffee Elixir (250 ml)"
+        },
+        desc: {
+          uz: "Muzlatgichda 14 kun saqlanadigan qora shisha idishdagi Efiopiya Cold Brew eliksiri.",
+          ru: "Фирменный колд брю в темном аптекарском стекле. Готов к употреблению со льдом.",
+          en: "Small-batch cold-steeped Ethiopian elixir in an amber apothecary glass bottle."
+        }
+      },
+      {
+        id: "nb-305",
+        badge: "hit",
+        price: 55000,
+        image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80",
+        title: {
+          uz: "NOIR Salted Caramel Mualliflik Siropi (250 ml)",
+          ru: "Крафтовый сироп Соленая Карамель (250 мл)",
+          en: "House-Made Sea Salt Caramel Syrup Bottle"
+        },
+        desc: {
+          uz: "Uyda qahva va pankeyklarga qo‘shish uchun oshpazimiz tomonidan pishirilgan tabiiy karamel.",
+          ru: "Натуральная тягучая карамель с морской солью для домашнего кофе и десертов.",
+          en: "Rich small-batch caramel syrup infused with flaky Maldon sea salt."
+        }
+      },
+      {
+        id: "nb-306",
+        badge: "new",
+        price: 29000,
+        image: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80",
+        title: {
+          uz: "Double Chocolate Chunk Cookie (Issiq)",
+          ru: "Кукис Двойной Шоколад и Грецкий Орех",
+          en: "Gooey Double Chocolate Chunk NYC Cookie"
+        },
+        desc: {
+          uz: "Nyu-York uslubidagi qalin shokoladli pechenye — usti qarsildoq, ichi erigan issiq shokolad.",
+          ru: "Знаменитое нью-йоркское печенье с жидким шоколадным центром.",
+          en: "Thick New York style bakery cookie with molten dark chocolate chunks."
+        }
+      },
+      {
+        id: "nb-307",
+        badge: "hit",
+        price: 65000,
+        image: "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=600&q=80",
+        title: {
+          uz: "Yaponiya Uji Matcha Kukuni (50g Bankada)",
+          ru: "Японский чай Удзи Матча в банке (50г)",
+          en: "Ceremonial Grade Uji Matcha Tin (50g)"
+        },
+        desc: {
+          uz: "Uyda Matcha-Latte tayyorlash uchun germetik qalay bankadagi original Yaponiya ko‘k choyi.",
+          ru: "Оригинальный японский матча первого сбора в герметичной жестяной баночке.",
+          en: "First-harvest stone-ground Uji green tea powder sealed in an airtight tin."
+        }
+      },
+      {
+        id: "nb-308",
+        badge: "new",
+        price: 25000,
+        image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80",
+        title: {
+          uz: "VIP Sovg‘a Qadoqlash + Tabriknoma Otkritkasi",
+          ru: "Премиум подарочная упаковка + Открытка",
+          en: "Luxury Ribbon Gift Box & Handwritten Card"
+        },
+        desc: {
+          uz: "Buyurtmangizni atlas lenta bilan o‘ralgan firma qutisida va qo‘lda yozilgan tabriknoma bilan yuboramiz.",
+          ru: "Упакуем ваш заказ в фирменную коробку с лентой и подпишем открытку от руки.",
+          en: "We wrap your coffee & pastry order in a signature satin-ribbon box with a card."
+        }
+      }
+    ];
+
+    /* ========================================================================
+       2. MULTI-LANGUAGE DICTIONARY (UZ / RU / EN)
+       ======================================================================== */
+    const I18N = {
+      uz: {
+        topbar_open: "Telegram Bot Orqali Rasmiylashtirish Faol (24/7)",
+        topbar_sec: "256-Bit SSL & 3D Secure To‘lov Himoyasi",
+        topbar_promo: "15% chegirma promo-kodi:",
+        nav_home: "Bosh sahifa",
+        nav_menu: "Katalog & Menyu",
+        nav_about: "Kafe haqida & Filiallar",
+        nav_checkout: "Rasmiylashtirish",
+        chk_kicker: "Step 4/4 • Express Order Dispatch",
+        chk_title: "Savat va <span>Telegram Bot</span> Orqali Rasmiylashtirish",
+        panel_1_title: "1. Savatingizdagi Mahsulotlar",
+        panel_2_title: "2. Qabul Qilish Usuli va Manzil",
+        panel_3_title: "3. To‘lov Turi va Barista Choychaqasi",
+        mode_del_title: "Kuryer Orqali Yetkazish",
+        mode_del_sub: "Toshkent bo‘ylab 25–35 daqiqa",
+        mode_pick_title: "Olib Ketish (-5% Bonus)",
+        mode_pick_sub: "Filial yoki Drive-Thru orqali",
+        mode_dine_title: "Kafeda Stolga Buyurtma",
+        mode_dine_sub: "Kelishingizga tayyor turadi",
+        sum_heading: "To‘lov Xulosasi",
+        sum_items: "Mahsulotlar soni:",
+        sum_subtotal: "Tovarlar summasi:",
+        sum_pickup_bonus: "Pickup / Promo chegirma:",
+        sum_tip: "Barista choychaqasi:",
+        sum_total: "Jami to‘lov:",
+        btn_send_bot: "Buyurtmani Telegram Botga Yuborish",
+        upsell_title: "Buyurtmangizga Shirinlik yoki Siroplar Qo‘shing",
+        hist_title: "Mening Yuborgan Buyurtmalarim Tarixi",
+        wishlist_title: "Saqlangan Tovarlar"
+      },
+      ru: {
+        topbar_open: "Оформление заказов через Telegram-Бот активно (24/7)",
+        topbar_sec: "Защита платежей 256-Bit SSL и 3D Secure",
+        topbar_promo: "Промокод на скидку 15%:",
+        nav_home: "Главная",
+        nav_menu: "Каталог и Меню",
+        nav_about: "О кафе и Филиалы",
+        nav_checkout: "Оформление",
+        chk_kicker: "Шаг 4/4 • Экспресс-Оформление Заказа",
+        chk_title: "Корзина и Отправка Заказа в <span>Telegram Бот</span>",
+        panel_1_title: "1. Товары в Вашей Корзине",
+        panel_2_title: "2. Способ Получения и Адрес в Ташкенте",
+        panel_3_title: "3. Способ Оплаты и Чаевые Бариста",
+        mode_del_title: "Курьерская Доставка",
+        mode_del_sub: "По Ташкенту за 25–35 минут",
+        mode_pick_title: "Самовывоз (-5% Бонус)",
+        mode_pick_sub: "Из филиала или Drive-Thru",
+        mode_dine_title: "Предзаказ к Столу в Кафе",
+        mode_dine_sub: "Приготовим к вашему приходу",
+        sum_heading: "Итоги Заказа",
+        sum_items: "Количество позиций:",
+        sum_subtotal: "Сумма товаров:",
+        sum_pickup_bonus: "Скидка (Промо / Самовывоз):",
+        sum_tip: "Чаевые бариста:",
+        sum_total: "Итого к оплате:",
+        btn_send_bot: "Отправить Заказ в Telegram Бот",
+        upsell_title: "Добавьте к Заказу Десерты или Сиропы",
+        hist_title: "История Моих Заказов",
+        wishlist_title: "Избранные Товары"
+      },
+      en: {
+        topbar_open: "Instant Telegram Bot Order Dispatch Active (24/7)",
+        topbar_sec: "256-Bit SSL & 3D Secure Checkout",
+        topbar_promo: "15% OFF promo code:",
+        nav_home: "Home",
+        nav_menu: "Catalog & Menu",
+        nav_about: "About & Branches",
+        nav_checkout: "Checkout",
+        chk_kicker: "Step 4/4 • Express Order Dispatch",
+        chk_title: "Shopping Cart & <span>Telegram Bot</span> Checkout",
+        panel_1_title: "1. Items in Your Shopping Bag",
+        panel_2_title: "2. Fulfillment Method & Tashkent Address",
+        panel_3_title: "3. Payment Method & Barista Tip",
+        mode_del_title: "Express Courier Delivery",
+        mode_del_sub: "Across Tashkent in 25–35 mins",
+        mode_pick_title: "Self-Pickup (-5% Bonus)",
+        mode_pick_sub: "From branch or Drive-Thru",
+        mode_dine_title: "Dine-In Table Pre-Order",
+        mode_dine_sub: "Ready right when you arrive",
+        sum_heading: "Order Summary",
+        sum_items: "Total items:",
+        sum_subtotal: "Items subtotal:",
+        sum_pickup_bonus: "Promo / Pickup discount:",
+        sum_tip: "Barista tip:",
+        sum_total: "Grand Total:",
+        btn_send_bot: "Dispatch Order to Telegram Bot",
+        upsell_title: "Complete Your Order with Artisan Treats",
+        hist_title: "My Order History",
+        wishlist_title: "Saved Favorites"
+      }
+    };
+
+    /* ========================================================================
+       3. STATE INITIALIZATION (SHARED LOCALSTORAGE)
+       ======================================================================== */
+    let state = {
+      lang: localStorage.getItem("nb_lang") || "uz",
+      theme: localStorage.getItem("nb_theme") || "dark",
+      wishlist: JSON.parse(localStorage.getItem("nb_wishlist") || "[]"),
+      cart: JSON.parse(localStorage.getItem("nb_cart") || "[]"),
+      orderHistory: JSON.parse(localStorage.getItem("nb_orders_history") || "[]"),
+      fulfillmentMode: "delivery", // 'delivery' | 'pickup' | 'dinein'
+      paymentMethod: "Click Up / QR",
+      tipAmount: 0,
+      promoRate: 0,
+      promoCode: ""
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      applyTheme(state.theme);
+      setLanguage(state.lang);
+      renderCheckoutCart();
+      renderUpsellItems();
+      renderOrderHistory();
+      updateWishlistUI();
+      recalculateTotals();
+    });
+
+    function formatUZS(num) {
+      return Number(num).toLocaleString("ru-RU") + " UZS";
+    }
+
+    function applyTheme(theme) {
+      state.theme = theme;
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("nb_theme", theme);
+      const icon = document.getElementById("themeIcon");
+      if (icon) icon.className = theme === "dark" ? "ri-sun-line" : "ri-moon-clear-line";
+    }
+
+    function toggleTheme() {
+      applyTheme(state.theme === "dark" ? "light" : "dark");
+    }
+
+    function setLanguage(lang) {
+      state.lang = lang;
+      localStorage.setItem("nb_lang", lang);
+
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+
+      const dict = I18N[lang] || I18N.uz;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const k = el.getAttribute("data-i18n");
+        if (dict[k]) el.innerHTML = dict[k];
+      });
+
+      renderCheckoutCart();
+      renderUpsellItems();
+      updateWishlistUI();
+      recalculateTotals();
+    }
+
+    /* ========================================================================
+       4. RENDER CHECKOUT CART & QUANTITY CONTROLS
+       ======================================================================== */
+    function renderCheckoutCart() {
+      const container = document.getElementById("checkoutCartList");
+      if (!container) return;
+
+      if (state.cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding: 48px 20px; background: var(--bg-elevated); border-radius: var(--radius-lg); border: 1px dashed var(--border-strong);">
+            <i class="ri-shopping-basket-line" style="font-size: 3.4rem; color: var(--accent-primary);"></i>
+            <h4 style="font-size: 1.25rem; margin-top: 10px;">Savatingiz hozircha bo‘sh</h4>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin: 6px 0 18px;">
+              Pastdagi shirinliklardan qo‘shing yoki menyudan issiq qahva tanlang.
+            </p>
+            <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+              <a href="menu.html" class="btn-primary"><i class="ri-cup-fill"></i> Katalogga o‘tish</a>
+              <button type="button" class="btn-outline" onclick="loadSampleCartForDemo()">
+                ✨ Demo Tovarlar To‘ldirish (Sinov uchun)
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = state.cart.map(item => {
+        const titleText = typeof item.title === "object" ? item.title[state.lang] : item.title;
+        return `
+          <div class="checkout-cart-row">
+            <img src="${item.image}" alt="${titleText}" />
+            <div class="row-info">
+              <h4>${titleText}</h4>
+              <span>Hajm / Tur: ${item.size}</span>
+            </div>
+            <div style="font-size:0.86rem; color:var(--text-secondary);">
+              ${formatUZS(item.price)} / dona
+            </div>
+            <div class="qty-control-lg">
+              <button type="button" onclick="changeCartQty('${item.cartKey}', -1)">-</button>
+              <strong style="font-size:0.95rem; min-width:20px; text-align:center;">${item.qty}</strong>
+              <button type="button" onclick="changeCartQty('${item.cartKey}', 1)">+</button>
+            </div>
+            <div class="row-total-price">${formatUZS(item.price * item.qty)}</div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function loadSampleCartForDemo() {
+      state.cart = [
+        {
+          cartKey: "nb-101_M",
+          id: "nb-101",
+          title: { uz: "Spanish Latte (Quyultirilgan Sutli)", ru: "Испанский Латте", en: "Spanish Latte" },
+          size: "M",
+          price: 36000,
+          image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=700&q=80",
+          qty: 2
+        },
+        {
+          cartKey: "nb-107_M",
+          id: "nb-107",
+          title: { uz: "San-Sebastyan Kuydirilgan Chizkeyki", ru: "Чизкейк Сан-Себастьян", en: "Basque Burnt Cheesecake" },
+          size: "M",
+          price: 48000,
+          image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=700&q=80",
+          qty: 1
+        }
+      ];
+      localStorage.setItem("nb_cart", JSON.stringify(state.cart));
+      renderCheckoutCart();
+      recalculateTotals();
+      showToast("✨ Savatga sinov uchun Spanish Latte va San-Sebastyan qo'shildi!");
+    }
+
+    function changeCartQty(cartKey, delta) {
+      const idx = state.cart.findIndex(i => i.cartKey === cartKey);
+      if (idx === -1) return;
+      state.cart[idx].qty += delta;
+      if (state.cart[idx].qty <= 0) state.cart.splice(idx, 1);
+      localStorage.setItem("nb_cart", JSON.stringify(state.cart));
+      renderCheckoutCart();
+      recalculateTotals();
+    }
+
+    function clearEntireCart() {
+      state.cart = [];
+      localStorage.setItem("nb_cart", "[]");
+      renderCheckoutCart();
+      recalculateTotals();
+      showToast("🗑 Savat tozalandi");
+    }
+
+    /* ========================================================================
+       5. FULFILLMENT MODES, DISTRICT CALCULATOR, TIPS & PROMO CODES
+       ======================================================================== */
+    function setFulfillmentMode(mode) {
+      state.fulfillmentMode = mode;
+      document.getElementById("tabDelivery").classList.toggle("active", mode === "delivery");
+      document.getElementById("tabPickup").classList.toggle("active", mode === "pickup");
+      document.getElementById("tabDinein").classList.toggle("active", mode === "dinein");
+
+      const addrInput = document.getElementById("chkAddressInput");
+      if (mode === "delivery") {
+        addrInput.placeholder = "Masalan: Shayxontohur tumani, Navoiy ko'chasi 18-uy, 45-xonadon";
+      } else if (mode === "pickup") {
+        addrInput.placeholder = "Qaysi filialdan olasiz? (Masalan: Tashkent City Boulevard yoki Sergeli Drive-Thru)";
+      } else {
+        addrInput.placeholder = "Filial nomi va stol raqami (Masalan: Yunusobod Gallery, 12-stol)";
+      }
+      recalculateTotals();
+    }
+
+    function selectPaymentMethod(methodName, cardEl) {
+      state.paymentMethod = methodName;
+      document.querySelectorAll(".pay-card").forEach(c => c.classList.remove("active"));
+      cardEl.classList.add("active");
+    }
+
+    function selectTipAmount(amount, btnEl) {
+      state.tipAmount = amount;
+      document.querySelectorAll(".tip-pill").forEach(b => b.classList.remove("active"));
+      btnEl.classList.add("active");
+      recalculateTotals();
+    }
+
+    function copyPromoCode(code) {
+      navigator.clipboard?.writeText(code);
+      document.getElementById("chkPromoInput").value = code;
+      applyCheckoutPromo();
+    }
+
+    function applyCheckoutPromo() {
+      const code = document.getElementById("chkPromoInput").value.trim().toUpperCase();
+      if (code === "AZ1K15" || code === "NOIR20") {
+        state.promoRate = code === "NOIR20" ? 0.20 : 0.15;
+        state.promoCode = code;
+        recalculateTotals();
+        showToast(`🎁 "${code}" promo-kodi faollashdi!`);
+      } else {
+        showToast("⚠️ Promo-kod topilmadi (AZ1K15 ni sinab ko'ring)");
+      }
+    }
+
+    function recalculateTotals() {
+      const totalItems = state.cart.reduce((s, i) => s + i.qty, 0);
+      const subtotal = state.cart.reduce((s, i) => s + i.price * i.qty, 0);
+
+      // Free shipping bar (Threshold: 150,000 UZS)
+      const threshold = 150000;
+      const pct = Math.min(100, Math.round((subtotal / threshold) * 100));
+      document.getElementById("freeShipProgressFill").style.width = pct + "%";
+      document.getElementById("freeShipPercentText").textContent = pct + "%";
+
+      if (subtotal >= threshold) {
+        document.getElementById("freeShipStatusText").innerHTML = `🎉 <span style="color:var(--success);">Tabriklaymiz! Yetkazib berish BEPUL (0 UZS)</span>`;
+      } else {
+        const diff = threshold - subtotal;
+        document.getElementById("freeShipStatusText").textContent = `🛵 Bepul yetkazishgacha yana: ${formatUZS(diff)}`;
+      }
+
+      // District delivery fee & ETA
+      const distVal = document.getElementById("chkDistrictSelect").value;
+      const [rawFee, etaStr, distName] = distVal.split("|");
+      let deliveryFee = Number(rawFee);
+
+      if (subtotal === 0 || subtotal >= threshold || state.fulfillmentMode !== "delivery") {
+        deliveryFee = 0;
+      }
+
+      // Discount calculation (Promo + 5% Pickup bonus)
+      let totalDiscountRate = state.promoRate;
+      if (state.fulfillmentMode === "pickup") {
+        totalDiscountRate += 0.05;
+      }
+      const discountAmount = Math.round(subtotal * totalDiscountRate);
+
+      const tip = subtotal > 0 ? state.tipAmount : 0;
+      const grandTotal = Math.max(0, subtotal - discountAmount + deliveryFee + tip);
+
+      document.getElementById("sumItemsCount").textContent = `${totalItems} ta`;
+      document.getElementById("sumSubtotal").textContent = formatUZS(subtotal);
+      document.getElementById("sumDiscount").textContent = "-" + formatUZS(discountAmount);
+      document.getElementById("sumEtaText").textContent = state.fulfillmentMode === "delivery" ? etaStr : "10 daq";
+      document.getElementById("sumDelivery").textContent = deliveryFee === 0 && subtotal > 0 ? "BEPUL (0 UZS)" : formatUZS(deliveryFee);
+      document.getElementById("sumTip").textContent = formatUZS(tip);
+      document.getElementById("sumGrandTotal").textContent = formatUZS(grandTotal);
+
+      return { totalItems, subtotal, discountAmount, deliveryFee, tip, grandTotal, distName, etaStr };
+    }
+
+    /* ========================================================================
+       6. IMPULSE UPSELL ITEMS & WISHLIST (LIKE ❤️) ENGINE
+       ======================================================================== */
+    function renderUpsellItems() {
+      const grid = document.getElementById("upsellGrid");
+      if (!grid) return;
+
+      grid.innerHTML = UPSELL_DB.map(item => {
+        const isLiked = state.wishlist.includes(item.id);
+        return `
+          <article class="product-card">
+            <div class="product-media">
+              <img src="${item.image}" alt="${item.title[state.lang]}" loading="lazy" />
+              <div class="product-badges">
+                <span class="badge-tag ${item.badge === 'hit' ? 'badge-hit' : 'badge-new'}">
+                  ${item.badge === 'hit' ? 'IMPULSE HIT' : 'ADD-ON'}
+                </span>
+              </div>
+              <div class="product-actions-top">
+                <button type="button" class="like-btn ${isLiked ? 'liked' : ''}" onclick="toggleWishlist('${item.id}')">
+                  <i class="${isLiked ? 'ri-heart-3-fill' : 'ri-heart-3-line'}"></i>
+                </button>
+              </div>
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">${item.title[state.lang]}</h3>
+              <p class="product-desc">${item.desc[state.lang]}</p>
+              <div class="product-footer">
+                <strong style="font-size:1.05rem;">${formatUZS(item.price)}</strong>
+                <button type="button" class="add-cart-btn" onclick="addUpsellToCart('${item.id}')">
+                  <i class="ri-add-circle-fill"></i> Qo‘shish
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function addUpsellToCart(id) {
+      const item = UPSELL_DB.find(x => x.id === id);
+      if (!item) return;
+      const cartKey = `${item.id}_ADDON`;
+      const existing = state.cart.find(i => i.cartKey === cartKey);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push({
+          cartKey,
+          id: item.id,
+          title: item.title,
+          size: "BOX",
+          price: item.price,
+          image: item.image,
+          qty: 1
+        });
+      }
+      localStorage.setItem("nb_cart", JSON.stringify(state.cart));
+      renderCheckoutCart();
+      recalculateTotals();
+      showToast(`🍫 "${item.title[state.lang]}" savatga qo'shildi!`);
+    }
+
+    function toggleWishlist(productId) {
+      const idx = state.wishlist.indexOf(productId);
+      const item = UPSELL_DB.find(x => x.id === productId);
+      const titleStr = item ? item.title[state.lang] : productId;
+      if (idx > -1) {
+        state.wishlist.splice(idx, 1);
+        showToast(`💔 "${titleStr}" saqlanganlardan o'chirildi`);
+      } else {
+        state.wishlist.push(productId);
+        showToast(`❤️ "${titleStr}" saqlanganlarga qo'shildi!`);
+      }
+      localStorage.setItem("nb_wishlist", JSON.stringify(state.wishlist));
+      renderUpsellItems();
+      updateWishlistUI();
+    }
+
+    function updateWishlistUI() {
+      document.getElementById("wishlistBadge").textContent = state.wishlist.length;
+      const container = document.getElementById("wishlistItemsContainer");
+      if (state.wishlist.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color:var(--text-secondary); padding:40px 10px;">Saqlangan tovarlar yo‘q.</p>`;
+        return;
+      }
+      container.innerHTML = state.wishlist.map(id => {
+        const item = UPSELL_DB.find(p => p.id === id);
+        if (!item) {
+          return `
+            <div class="drawer-item">
+              <div style="flex:1;">
+                <h5 style="font-size:0.9rem;">Tovar ID: ${id}</h5>
+                <p style="font-size:0.78rem; color:var(--accent-primary);">Katalogdan saqlangan</p>
+              </div>
+              <a href="menu.html" class="btn-outline" style="padding:6px 12px; font-size:0.75rem;">Ko‘rish</a>
+            </div>
+          `;
+        }
+        return `
+          <div class="drawer-item">
+            <img src="${item.image}" alt="${item.title[state.lang]}" />
+            <div style="flex:1;">
+              <h5 style="font-size:0.9rem;">${item.title[state.lang]}</h5>
+              <p style="font-size:0.78rem; color:var(--accent-primary); font-weight:700;">${formatUZS(item.price)}</p>
+            </div>
+            <button class="icon-btn" style="width:36px; height:36px;" onclick="addUpsellToCart('${item.id}')">
+              <i class="ri-shopping-cart-2-line"></i>
+            </button>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function openWishlistDrawer() {
+      document.getElementById("globalBackdrop").classList.add("active");
+      document.getElementById("wishlistDrawer").classList.add("active");
+    }
+
+    function closeModals() {
+      document.getElementById("globalBackdrop").classList.remove("active");
+      document.getElementById("wishlistDrawer").classList.remove("active");
+      document.getElementById("receiptModal").classList.remove("active");
+    }
+
+    /* ========================================================================
+       7. DISPATCH FINAL ORDER TO TELEGRAM BOT + GENERATE RECEIPT & HISTORY
+       ======================================================================== */
+    async function dispatchFinalOrderToTelegram() {
+      if (state.cart.length === 0) {
+        showToast("⚠️ Savatingiz bo'sh! Avval mahsulot qo'shing.");
+        return;
+      }
+
+      const name = document.getElementById("chkCustomerName").value.trim();
+      const phone = document.getElementById("chkCustomerPhone").value.trim();
+      const address = document.getElementById("chkAddressInput").value.trim();
+      const notes = document.getElementById("chkOrderNotes").value.trim() || "Yo'q";
+      const timeSlot = document.getElementById("chkTimeSlot").value;
+      const ecoCutlery = document.getElementById("chkEcoCutlery").checked ? "Ha (Yog'och anjomlar)" : "Kerak emas";
+      const callConfirm = document.getElementById("chkCallConfirm").checked ? "Ha, qo'ng'iroq qiling" : "Qo'ng'iroqsiz";
+
+      if (!name || !phone || !address) {
+        showToast("⚠️ Iltimos, Ism, Telefon raqami va Manzilni to'ldiring!");
+        document.getElementById("chkCustomerName").focus();
+        return;
+      }
+
+      const btn = document.getElementById("finalTelegramOrderBtn");
+      const origHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<i class="ri-loader-4-line"></i> Telegram Botga Yuborilmoqda...`;
+
+      const { subtotal, discountAmount, deliveryFee, tip, grandTotal, distName, etaStr } = recalculateTotals();
+      const orderId = "NB-" + Math.floor(100000 + Math.random() * 900000);
+      const timestamp = new Date().toLocaleString("ru-RU");
+
+      const modeLabel =
+        state.fulfillmentMode === "delivery" ? `🛵 Kuryer (${distName})` :
+        state.fulfillmentMode === "pickup" ? "🛍 Olib ketish (Pickup -5%)" : "☕️ Kafeda stolga buyurtma";
+
+      const itemsLines = state.cart.map((item, idx) => {
+        const t = typeof item.title === "object" ? item.title.uz : item.title;
+        return `${idx + 1}. <b>${t}</b> [${item.size}] — ${item.qty} x ${formatUZS(item.price)} = <b>${formatUZS(item.price * item.qty)}</b>`;
+      }).join("\n");
+
+      const telegramText =
+`🧾 <b>YANGI RASMIY BUYURTMA — NOIR & BEAN (checkout.html)</b>
+🆔 <b>Chek raqami:</b> #${orderId}
+🕒 <b>Vaqt:</b> ${timestamp}
+━━━━━━━━━━━━━━━━━━━━
+👤 <b>Mijoz:</b> ${name}
+📞 <b>Telefon:</b> ${phone}
+🚚 <b>Xizmat turi:</b> ${modeLabel}
+📍 <b>Manzil / Filial:</b> ${address}
+⏰ <b>Yetkazish vaqti:</b> ${timeSlot} (${etaStr})
+💳 <b>To'lov usuli:</b> ${state.paymentMethod}
+🌿 <b>Eko-anjomlar:</b> ${ecoCutlery}
+📞 <b>Tasdiqlash:</b> ${callConfirm}
+💬 <b>Izoh:</b> ${notes}
+━━━━━━━━━━━━━━━━━━━━
+🛒 <b>SAVAT TARKIBI:</b>
+${itemsLines}
+━━━━━━━━━━━━━━━━━━━━
+💵 <b>Tovarlar summasi:</b> ${formatUZS(subtotal)}
+🎁 <b>Chegirma (${state.promoCode || 'Pickup'}):</b> -${formatUZS(discountAmount)}
+🛵 <b>Yetkazib berish:</b> ${formatUZS(deliveryFee)}
+☕️ <b>Barista choychaqasi:</b> ${formatUZS(tip)}
+🔥 <b>JAMI TO'LOV: ${formatUZS(grandTotal)}</b>`;
+
+      try {
+        const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: telegramText,
+            parse_mode: "HTML"
+          })
+        });
+        const resData = await response.json();
+
+        if (resData.ok) {
+          // Save to Order History
+          const orderRecord = {
+            orderId,
+            date: timestamp,
+            customer: `${name} (${modeLabel})`,
+            itemsSummary: state.cart.map(i => `${typeof i.title === 'object' ? i.title.uz : i.title} x${i.qty}`).join(", "),
+            total: grandTotal
+          };
+          state.orderHistory.unshift(orderRecord);
+          localStorage.setItem("nb_orders_history", JSON.stringify(state.orderHistory));
+
+          // Show Printable Fiscal Receipt Modal
+          showFiscalReceiptModal(orderId, timestamp, name, phone, modeLabel, address, state.cart, subtotal, discountAmount, deliveryFee, tip, grandTotal);
+
+          // Empty Cart
+          state.cart = [];
+          localStorage.setItem("nb_cart", "[]");
+          renderCheckoutCart();
+          renderOrderHistory();
+          recalculateTotals();
+          showToast(`✅ Buyurtma #${orderId} Telegram botingizga muvaffaqiyatli tushdi!`);
+        } else {
+          showToast("⚠️ Telegram API xatosi: " + (resData.description || "Tekshiring"));
+        }
+      } catch (err) {
+        showToast("⚠️ Tarmoq xatoligi! Internet aloqasini tekshiring.");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = origHTML;
+      }
+    }
+
+    function showFiscalReceiptModal(orderId, dateStr, name, phone, mode, addr, cartItems, sub, disc, del, tip, total) {
+      const paper = document.getElementById("receiptPaperContent");
+      const rowsHTML = cartItems.map(i => {
+        const t = typeof i.title === "object" ? i.title.uz : i.title;
+        return `
+          <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:6px;">
+            <span>${t} (${i.qty}x)</span>
+            <strong>${formatUZS(i.price * i.qty)}</strong>
+          </div>
+        `;
+      }).join("");
+
+      paper.innerHTML = `
+        <h3>NOIR & BEAN ROASTERY</h3>
+        <p style="text-align:center; font-size:0.75rem; color:#5c5149;">Tashkent City Boulevard 14 • STIR: 309841255</p>
+        <div class="receipt-divider"></div>
+        <div style="font-size:0.78rem; line-height:1.5;">
+          <div><b>FISKAL CHEK:</b> #${orderId}</div>
+          <div><b>SANA:</b> ${dateStr}</div>
+          <div><b>MIJOZ:</b> ${name} (${phone})</div>
+          <div><b>USUL:</b> ${mode}</div>
+          <div><b>MANZIL:</b> ${addr}</div>
+        </div>
+        <div class="receipt-divider"></div>
+        ${rowsHTML}
+        <div class="receipt-divider"></div>
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
+          <span>Oraliq summa:</span><span>${formatUZS(sub)}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
+          <span>Chegirma:</span><span>-${formatUZS(disc)}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
+          <span>Yetkazish:</span><span>${formatUZS(del)}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
+          <span>Choychaqa:</span><span>${formatUZS(tip)}</span>
+        </div>
+        <div class="receipt-divider"></div>
+        <div style="display:flex; justify-content:space-between; font-size:1.05rem; font-weight:800;">
+          <span>JAMI TO'LOV:</span><span>${formatUZS(total)}</span>
+        </div>
+        <div style="text-align:center; margin-top:16px; font-size:0.74rem; color:#10b981; font-weight:700;">
+          ✓ TELEGRAM BOTGA TASDIQLANDI (ID: 8731329676)
+        </div>
+        <div style="display:flex; gap:10px; margin-top:18px;">
+          <button type="button" onclick="window.print()" style="flex:1; background:#181412; color:#fff; padding:10px; border-radius:8px; font-weight:700;">
+            🖨 Chop etish
+          </button>
+          <button type="button" onclick="closeModals()" style="flex:1; border:1px solid #181412; color:#181412; padding:10px; border-radius:8px; font-weight:700;">
+            Yopish
+          </button>
+        </div>
+      `;
+
+      document.getElementById("globalBackdrop").classList.add("active");
+      document.getElementById("receiptModal").classList.add("active");
+    }
+
+    function renderOrderHistory() {
+      const tbody = document.getElementById("orderHistoryTableBody");
+      if (!tbody) return;
+
+      if (state.orderHistory.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align:center; color:var(--text-secondary); padding:28px;">
+              Hozircha buyurtmalar tarixi bo‘sh. Birinchi buyurtmangizni yuboring!
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = state.orderHistory.map(ord => `
+        <tr>
+          <td><strong style="color:var(--accent-primary);">#${ord.orderId}</strong></td>
+          <td>${ord.date}</td>
+          <td>${ord.customer}</td>
+          <td style="max-width:320px;">${ord.itemsSummary}</td>
+          <td><strong>${formatUZS(ord.total)}</strong></td>
+          <td><span class="badge-tag badge-new">Telegram Botda Qabul Qilindi</span></td>
+        </tr>
+      `).join("");
+    }
+
+    function clearOrderHistory() {
+      state.orderHistory = [];
+      localStorage.setItem("nb_orders_history", "[]");
+      renderOrderHistory();
+      showToast("🗑 Buyurtmalar tarixi tozalandi");
+    }
+
+    function showToast(msg) {
+      const container = document.getElementById("toastContainer");
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.innerHTML = `<i class="ri-checkbox-circle-fill" style="color:var(--accent-primary);"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3400);
+    }
+  </script>
+</body>
+</html>

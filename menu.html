@@ -1,0 +1,3430 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOIR & BEAN — To‘liq Katalog, Kafe Menyusi va Online Magazin</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- RemixIcon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. SENIOR DESIGN SYSTEM & CSS TOKENS (DARK / LIGHT MODE)
+       ========================================================================== */
+    :root {
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+      --accent-primary: #d4a373;
+      --accent-primary-hover: #e6b88a;
+      --accent-secondary: #bc6c25;
+      --accent-glow: rgba(212, 163, 115, 0.25);
+
+      --danger: #ef4444;
+      --danger-soft: rgba(239, 68, 68, 0.14);
+      --success: #10b981;
+      --success-soft: rgba(16, 185, 129, 0.14);
+      --warning: #f59e0b;
+      --info: #3b82f6;
+
+      --radius-xs: 8px;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 26px;
+      --radius-xl: 36px;
+      --radius-full: 9999px;
+
+      --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-smooth: 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      --container-width: 1380px;
+    }
+
+    html[data-theme="dark"] {
+      --bg-main: #0b0908;
+      --bg-elevated: #14110f;
+      --bg-card: #1a1614;
+      --bg-card-hover: #231e1b;
+      --bg-glass: rgba(20, 17, 15, 0.86);
+      --bg-input: #110e0c;
+
+      --text-primary: #f9f6f0;
+      --text-secondary: #b8afa6;
+      --text-muted: #7d736a;
+
+      --border-subtle: rgba(255, 248, 240, 0.08);
+      --border-strong: rgba(212, 163, 115, 0.32);
+
+      --shadow-card: 0 18px 42px -12px rgba(0, 0, 0, 0.65);
+      --shadow-floating: 0 28px 65px -10px rgba(0, 0, 0, 0.85);
+    }
+
+    html[data-theme="light"] {
+      --bg-main: #faf6f0;
+      --bg-elevated: #f2ece1;
+      --bg-card: #ffffff;
+      --bg-card-hover: #fdfbf7;
+      --bg-glass: rgba(250, 246, 240, 0.88);
+      --bg-input: #f4efe6;
+
+      --text-primary: #1c1613;
+      --text-secondary: #5c5149;
+      --text-muted: #8c7f75;
+
+      --border-subtle: rgba(28, 22, 19, 0.09);
+      --border-strong: rgba(188, 108, 37, 0.35);
+
+      --shadow-card: 0 14px 34px -10px rgba(28, 22, 19, 0.08);
+      --shadow-floating: 0 24px 56px -12px rgba(28, 22, 19, 0.16);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color var(--transition-smooth), color var(--transition-smooth);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      background: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-main);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-secondary);
+      border-radius: var(--radius-full);
+    }
+
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==========================================================================
+       3. TOP ANNOUNCEMENT BAR & HEADER
+       ========================================================================== */
+    .topbar {
+      background: linear-gradient(90deg, #1f1712 0%, #2c1e16 50%, #1f1712 100%);
+      color: #f9f6f0;
+      font-size: 0.82rem;
+      border-bottom: 1px solid rgba(212, 163, 115, 0.18);
+      padding: 9px 0;
+      position: relative;
+      z-index: 100;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .topbar-left, .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .topbar-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #e6dcd2;
+    }
+
+    .topbar-item i {
+      color: var(--accent-primary);
+      font-size: 1rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--success);
+      box-shadow: 0 0 10px var(--success);
+      display: inline-block;
+      animation: pulseDot 2s infinite;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.35); opacity: 0.65; }
+    }
+
+    .promo-pill {
+      background: rgba(212, 163, 115, 0.2);
+      border: 1px dashed var(--accent-primary);
+      color: var(--accent-primary);
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .promo-pill:hover {
+      background: var(--accent-primary);
+      color: #0b0908;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 95;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: var(--transition-smooth);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 84px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b0908;
+      font-size: 1.5rem;
+      box-shadow: 0 8px 20px var(--accent-glow);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .brand-subtitle {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent-primary);
+      margin-top: 3px;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-elevated);
+      padding: 6px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .nav-link {
+      padding: 9px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link.active {
+      background: var(--accent-primary);
+      color: #0b0908;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .header-search {
+      position: relative;
+      flex: 1;
+      max-width: 280px;
+    }
+
+    .header-search input {
+      width: 100%;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 16px 10px 40px;
+      border-radius: var(--radius-full);
+      font-size: 0.86rem;
+      color: var(--text-primary);
+      transition: var(--transition-fast);
+    }
+
+    .header-search input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .header-search i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 3px;
+    }
+
+    .lang-btn {
+      padding: 5px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: var(--transition-fast);
+    }
+
+    .lang-btn.active {
+      background: var(--bg-card);
+      color: var(--accent-primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon-btn {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      transition: var(--transition-fast);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+
+    .badge-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      border-radius: var(--radius-full);
+      background: var(--danger);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--bg-main);
+    }
+
+    .cart-trigger-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: #0b0908;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      box-shadow: 0 8px 22px var(--accent-glow);
+      transition: var(--transition-fast);
+    }
+
+    .cart-trigger-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .cart-trigger-badge {
+      background: #0b0908;
+      color: var(--accent-primary);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    /* ==========================================================================
+       4. CATALOG HERO BANNER & MACRO TRACKER BAR
+       ========================================================================== */
+    .catalog-hero {
+      position: relative;
+      padding: 52px 0 42px;
+      background: radial-gradient(circle at 80% 20%, rgba(212, 163, 115, 0.14), transparent 55%),
+                  var(--bg-elevated);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .catalog-hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .breadcrumb {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--accent-primary);
+    }
+
+    .catalog-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.3rem, 4vw, 3.5rem);
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+
+    .catalog-hero-title span {
+      color: var(--accent-primary);
+      font-style: italic;
+    }
+
+    .catalog-hero-desc {
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      max-width: 640px;
+    }
+
+    /* Live Nutrition & Caffeine Widget */
+    .macro-widget {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .macro-widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .macro-widget-header h4 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent-primary);
+    }
+
+    .macro-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .macro-stat-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .macro-stat-box strong {
+      display: block;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .macro-stat-box span {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       5. CURATED COMBO BOXES SECTION (4 SPECIAL SETS)
+       ========================================================================== */
+    .combos-section {
+      padding: 52px 0 24px;
+    }
+
+    .section-head-inline {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .section-kicker {
+      color: var(--accent-primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      line-height: 1.15;
+    }
+
+    .combos-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .combo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-card);
+    }
+
+    .combo-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-floating);
+    }
+
+    .combo-img {
+      position: relative;
+      height: 185px;
+      overflow: hidden;
+    }
+
+    .combo-img img {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+    }
+
+    .combo-card:hover .combo-img img {
+      transform: scale(1.07);
+    }
+
+    .combo-save-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--danger);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .combo-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .combo-body h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .combo-body p {
+      font-size: 0.81rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .combo-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-subtle);
+    }
+
+    /* ==========================================================================
+       6. MAIN CATALOG LAYOUT (SIDEBAR FILTERS + PRODUCT AREA)
+       ========================================================================== */
+    .catalog-workspace {
+      padding: 42px 0 84px;
+    }
+
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 310px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Sticky Sidebar */
+    .filter-sidebar {
+      position: sticky;
+      top: 104px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .filter-group-title {
+      font-size: 0.86rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-cat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar-cat-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-elevated);
+      border: 1px solid transparent;
+      transition: var(--transition-fast);
+    }
+
+    .sidebar-cat-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--border-subtle);
+    }
+
+    .sidebar-cat-btn.active {
+      background: var(--accent-primary);
+      color: #0b0908;
+      font-weight: 700;
+      box-shadow: 0 6px 16px var(--accent-glow);
+    }
+
+    .cat-count-pill {
+      font-size: 0.74rem;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    /* Price Range Slider */
+    .range-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .range-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-full);
+      outline: none;
+    }
+
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      cursor: pointer;
+      border: 3px solid var(--bg-card);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Dietary Checkboxes / Tag Chips */
+    .dietary-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .diet-chip {
+      padding: 7px 12px;
+      border-radius: var(--radius-full);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: var(--transition-fast);
+    }
+
+    .diet-chip.active {
+      background: rgba(212, 163, 115, 0.18);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    /* Catalog Toolbar */
+    .catalog-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      margin-bottom: 24px;
+    }
+
+    .toolbar-left {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    .toolbar-left strong {
+      color: var(--text-primary);
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sort-select {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 9px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .view-toggle {
+      display: flex;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 3px;
+    }
+
+    .view-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-xs);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    .view-btn.active {
+      background: var(--bg-card);
+      color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       7. PRODUCT CARDS (GRID & LIST MODE)
+       ========================================================================== */
+    .catalog-products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+      gap: 24px;
+    }
+
+    .catalog-products-grid.list-view {
+      grid-template-columns: 1fr;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition-smooth);
+      box-shadow: var(--shadow-card);
+    }
+
+    .catalog-products-grid.list-view .product-card {
+      flex-direction: row;
+      align-items: stretch;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-floating);
+    }
+
+    .product-media {
+      position: relative;
+      height: 225px;
+      overflow: hidden;
+      background: var(--bg-elevated);
+      flex-shrink: 0;
+    }
+
+    .catalog-products-grid.list-view .product-media {
+      width: 280px;
+      height: auto;
+    }
+
+    .product-media img {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s ease;
+    }
+
+    .product-card:hover .product-media img {
+      transform: scale(1.08);
+    }
+
+    .product-badges {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .badge-tag {
+      padding: 4px 11px;
+      border-radius: var(--radius-full);
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-hit { background: rgba(212, 163, 115, 0.94); color: #0b0908; }
+    .badge-new { background: rgba(16, 185, 129, 0.94); color: #ffffff; }
+    .badge-chef { background: rgba(239, 68, 68, 0.94); color: #ffffff; }
+
+    .product-actions-top {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .like-btn, .quickview-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(15, 12, 10, 0.74);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: var(--transition-fast);
+    }
+
+    .like-btn:hover, .quickview-btn:hover {
+      transform: scale(1.1);
+      background: var(--bg-card);
+      color: var(--accent-primary);
+    }
+
+    .like-btn.liked {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: #ffffff;
+    }
+
+    .product-meta-strip {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(11, 9, 8, 0.78);
+      backdrop-filter: blur(8px);
+      padding: 5px 11px;
+      border-radius: var(--radius-full);
+      color: #f4efe6;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .product-meta-strip i {
+      color: var(--accent-primary);
+    }
+
+    .product-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-cat-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-primary);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .product-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .product-desc {
+      font-size: 0.83rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .size-selector {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+      background: var(--bg-elevated);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+    }
+
+    .size-pill {
+      flex: 1;
+      text-align: center;
+      padding: 5px 0;
+      font-size: 0.74rem;
+      font-weight: 700;
+      border-radius: var(--radius-xs);
+      color: var(--text-secondary);
+      transition: var(--transition-fast);
+    }
+
+    .size-pill.active {
+      background: var(--bg-card);
+      color: var(--accent-primary);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .price-old {
+      font-size: 0.73rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      display: block;
+    }
+
+    .price-current {
+      font-size: 1.14rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .add-cart-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--text-primary);
+      padding: 9px 15px;
+      border-radius: var(--radius-full);
+      font-size: 0.83rem;
+      font-weight: 700;
+      transition: var(--transition-fast);
+    }
+
+    .add-cart-btn:hover {
+      background: var(--accent-primary);
+      color: #0b0908;
+      border-color: var(--accent-primary);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      color: #0b0908;
+      font-weight: 800;
+      padding: 13px 26px;
+      border-radius: var(--radius-full);
+      font-size: 0.92rem;
+      box-shadow: 0 10px 24px var(--accent-glow);
+      transition: var(--transition-fast);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      font-weight: 700;
+      padding: 11px 22px;
+      border-radius: var(--radius-full);
+      font-size: 0.88rem;
+      transition: var(--transition-fast);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       8. B2B / OFFICE COFFEE SUBSCRIPTION SECTION (TELEGRAM INTEGRATED)
+       ========================================================================== */
+    .b2b-section {
+      padding: 76px 0;
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .b2b-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      padding: 42px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 40px;
+      align-items: center;
+      box-shadow: var(--shadow-card);
+    }
+
+    .b2b-perks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .b2b-perk {
+      background: var(--bg-elevated);
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .b2b-perk i {
+      color: var(--accent-primary);
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+
+    .b2b-perk h5 {
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+
+    .b2b-perk p {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .form-control {
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 15px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      color: var(--text-primary);
+    }
+
+    .form-control:focus {
+      border-color: var(--accent-primary);
+    }
+
+    /* ==========================================================================
+       9. DRAWERS, MODALS, TOASTS & FOOTER
+       ========================================================================== */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+
+    .backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 460px;
+      height: 100vh;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border-strong);
+      z-index: 210;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(102%);
+      transition: transform var(--transition-smooth);
+      box-shadow: var(--shadow-floating);
+    }
+
+    .drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drawer-header h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .drawer-item {
+      display: flex;
+      gap: 14px;
+      background: var(--bg-elevated);
+      padding: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      align-items: center;
+    }
+
+    .drawer-item img {
+      width: 68px;
+      height: 68px;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+
+    .drawer-item-info {
+      flex: 1;
+    }
+
+    .drawer-item-info h5 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .drawer-item-info p {
+      font-size: 0.78rem;
+      color: var(--accent-primary);
+      font-weight: 700;
+    }
+
+    .qty-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 3px 8px;
+      margin-top: 6px;
+    }
+
+    .qty-btn {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      background: var(--bg-elevated);
+    }
+
+    .drawer-footer {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-elevated);
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .summary-line.total {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+      margin-bottom: 16px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 230;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition-smooth);
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      width: 100%;
+      max-width: 640px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      box-shadow: var(--shadow-floating);
+    }
+
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent-primary);
+      border-top: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-floating);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .footer {
+      background: var(--bg-elevated);
+      border-top: 1px solid var(--border-subtle);
+      padding: 64px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      margin-bottom: 16px;
+      color: var(--accent-primary);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      transition: var(--transition-fast);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-primary);
+      transform: translateX(4px);
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 1120px) {
+      .catalog-hero-grid,
+      .workspace-grid,
+      .b2b-card {
+        grid-template-columns: 1fr;
+      }
+      .combos-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .filter-sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .nav-links, .header-search {
+        display: none;
+      }
+      .combos-grid,
+      .footer-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .catalog-products-grid.list-view .product-card {
+        flex-direction: column;
+      }
+      .catalog-products-grid.list-view .product-media {
+        width: 100%;
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       TOP ANNOUNCEMENT BAR
+       ======================================================================== -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span class="topbar-item">
+          <span class="status-dot"></span>
+          <span data-i18n="topbar_open">Barcha filiallar ochiq: 07:30 – 23:30</span>
+        </span>
+        <span class="topbar-item">
+          <i class="ri-truck-line"></i>
+          <span data-i18n="topbar_free">150,000 UZS dan yuqori buyurtmalarga yetkazish BEPUL</span>
+        </span>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-item">
+          <i class="ri-gift-2-fill"></i>
+          <span data-i18n="topbar_promo">15% chegirma promo-kodi:</span>
+          <button class="promo-pill" onclick="copyPromoCode('AZ1K15')">AZ1K15</button>
+        </span>
+        <a href="tel:+998712007788" class="topbar-item">
+          <i class="ri-phone-fill"></i> +998 (71) 200-77-88
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       STICKY HEADER & MULTI-PAGE NAVIGATION
+       ======================================================================== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon"><i class="ri-cup-fill"></i></div>
+        <div class="brand-text">
+          <span class="brand-title">NOIR & BEAN</span>
+          <span class="brand-subtitle">Roastery & Online Store</span>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">
+          <i class="ri-home-5-line"></i>
+          <span data-i18n="nav_home">Bosh sahifa</span>
+        </a>
+        <a href="menu.html" class="nav-link active">
+          <i class="ri-restaurant-2-line"></i>
+          <span data-i18n="nav_menu">Katalog & Menyu</span>
+        </a>
+        <a href="about.html" class="nav-link">
+          <i class="ri-store-3-line"></i>
+          <span data-i18n="nav_about">Kafe haqida & Filiallar</span>
+        </a>
+        <a href="checkout.html" class="nav-link">
+          <i class="ri-shopping-bag-3-line"></i>
+          <span data-i18n="nav_checkout">Rasmiylashtirish</span>
+        </a>
+      </nav>
+
+      <div class="header-search">
+        <i class="ri-search-2-line"></i>
+        <input
+          type="text"
+          id="menuSearchInput"
+          placeholder="24+ tovar ichidan qidirish..."
+          data-i18n-placeholder="search_placeholder"
+          oninput="handleSearch(this.value)"
+        />
+      </div>
+
+      <div class="header-actions">
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="uz" onclick="setLanguage('uz')">UZ</button>
+          <button class="lang-btn" data-lang="ru" onclick="setLanguage('ru')">RU</button>
+          <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+        </div>
+
+        <button class="icon-btn" onclick="toggleTheme()" title="Dark / Light Mode">
+          <i class="ri-sun-line" id="themeIcon"></i>
+        </button>
+
+        <button class="icon-btn" onclick="openDrawer('wishlistDrawer')" title="Saqlangan tovarlar">
+          <i class="ri-heart-3-line"></i>
+          <span class="badge-count" id="wishlistBadge">0</span>
+        </button>
+
+        <button class="cart-trigger-btn" onclick="openDrawer('cartDrawer')">
+          <i class="ri-shopping-basket-2-fill"></i>
+          <span data-i18n="btn_cart">Savat</span>
+          <span class="cart-trigger-badge" id="cartBadge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       CATALOG HERO BANNER & LIVE NUTRITION / CAFFEINE TRACKER
+       ======================================================================== -->
+  <section class="catalog-hero">
+    <div class="container catalog-hero-grid">
+      <div>
+        <div class="breadcrumb">
+          <a href="index.html" data-i18n="nav_home">Bosh sahifa</a>
+          <i class="ri-arrow-right-s-line"></i>
+          <span style="color: var(--accent-primary);" data-i18n="nav_menu">Katalog & Menyu</span>
+        </div>
+        <h1 class="catalog-hero-title" data-i18n="mhero_title">
+          To‘liq Kafe Menyusi va <span>Specialty Coffee</span> Market
+        </h1>
+        <p class="catalog-hero-desc" data-i18n="mhero_desc">
+          24 xil mualliflik ichimliklari, yangi uzilgan kruassanlar, issiq bistro nonushtalari hamda uy va ofis uchun qovurilgan 100% Arabica donlari.
+        </p>
+      </div>
+
+      <!-- Live Cart Nutrition & Caffeine Tracker -->
+      <div class="macro-widget">
+        <div class="macro-widget-header">
+          <h4>
+            <i class="ri-heart-pulse-fill"></i>
+            <span data-i18n="macro_title">Savatingizdagi Kaloriya va Kofein Balansi</span>
+          </h4>
+          <span style="font-size:0.74rem; color:var(--text-muted);" id="macroItemCount">0 ta mahsulot</span>
+        </div>
+        <div class="macro-stats-grid">
+          <div class="macro-stat-box">
+            <strong id="macroTotalCalories">0 kkal</strong>
+            <span data-i18n="macro_cal">Jami Energiya</span>
+          </div>
+          <div class="macro-stat-box">
+            <strong id="macroTotalCaffeine">0 mg</strong>
+            <span data-i18n="macro_caf">Kofein Miqdori</span>
+          </div>
+          <div class="macro-stat-box">
+            <strong id="macroTotalProtein">0 g</strong>
+            <span data-i18n="macro_prot">Oqsillar (Protein)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SPECIAL BARISTA COMBO SETS (4 UNIQUE SETS)
+       ======================================================================== -->
+  <section class="combos-section">
+    <div class="container">
+      <div class="section-head-inline">
+        <div>
+          <span class="section-kicker" data-i18n="combo_kicker">Foydali To‘plamlar (-20% gacha)</span>
+          <h2 class="section-title" data-i18n="combo_title">Barista Kombo-Setlar va Nonushta Bokslari</h2>
+        </div>
+      </div>
+
+      <div class="combos-grid" id="combosGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       MAIN CATALOG WORKSPACE (SIDEBAR FILTERS + 24 PRODUCTS GRID/LIST)
+       ======================================================================== -->
+  <section class="catalog-workspace">
+    <div class="container workspace-grid">
+
+      <!-- LEFT STICKY FILTER SIDEBAR -->
+      <aside class="filter-sidebar">
+        <div>
+          <div class="filter-group-title">
+            <span data-i18n="side_cats">Kategoriyalar</span>
+            <button style="font-size:0.74rem; color:var(--text-muted); text-transform:none;" onclick="resetAllFilters()" data-i18n="side_reset">Tozalash</button>
+          </div>
+          <div class="sidebar-cat-list" id="sidebarCategories">
+            <button class="sidebar-cat-btn active" data-cat="all" onclick="setCategory('all')">
+              <span><i class="ri-apps-2-line"></i> <span data-i18n="cat_all">Barcha Tovarlar</span></span>
+              <span class="cat-count-pill">24</span>
+            </button>
+            <button class="sidebar-cat-btn" data-cat="hot_coffee" onclick="setCategory('hot_coffee')">
+              <span><i class="ri-cup-line"></i> <span data-i18n="cat_hot">Issiq Qahva & Pour-Over</span></span>
+              <span class="cat-count-pill">6</span>
+            </button>
+            <button class="sidebar-cat-btn" data-cat="iced_drinks" onclick="setCategory('iced_drinks')">
+              <span><i class="ri-goblet-line"></i> <span data-i18n="cat_iced">Muzdek Bar & Matcha</span></span>
+              <span class="cat-count-pill">5</span>
+            </button>
+            <button class="sidebar-cat-btn" data-cat="bakery" onclick="setCategory('bakery')">
+              <span><i class="ri-cake-3-line"></i> <span data-i18n="cat_bakery">Desert va Viyechka</span></span>
+              <span class="cat-count-pill">5</span>
+            </button>
+            <button class="sidebar-cat-btn" data-cat="kitchen" onclick="setCategory('kitchen')">
+              <span><i class="ri-restaurant-line"></i> <span data-i18n="cat_kitchen">Issiq Nonushta & Bistro</span></span>
+              <span class="cat-count-pill">4</span>
+            </button>
+            <button class="sidebar-cat-btn" data-cat="beans" onclick="setCategory('beans')">
+              <span><i class="ri-shopping-bag-2-line"></i> <span data-i18n="cat_beans">Qahva Donlari & Uskuna</span></span>
+              <span class="cat-count-pill">4</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Max Price Slider -->
+        <div>
+          <div class="filter-group-title">
+            <span data-i18n="side_price">Maksimal Narx</span>
+            <strong id="priceSliderLabel" style="color:var(--text-primary);">260,000 UZS</strong>
+          </div>
+          <div class="range-wrap">
+            <input
+              type="range"
+              min="25000"
+              max="260000"
+              step="5000"
+              value="260000"
+              class="range-slider"
+              id="maxPriceSlider"
+              oninput="handlePriceSlider(this.value)"
+            />
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
+              <span>25,000 UZS</span>
+              <span>260,000 UZS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dietary & Feature Tags -->
+        <div>
+          <div class="filter-group-title">
+            <span data-i18n="side_tags">Maxsus Filtrlar</span>
+          </div>
+          <div class="dietary-chips">
+            <button class="diet-chip" data-tag="hit" onclick="toggleTagFilter('hit', this)">🔥 Bestseller</button>
+            <button class="diet-chip" data-tag="vegan" onclick="toggleTagFilter('vegan', this)">🌱 Vegan / Laktozasiz</button>
+            <button class="diet-chip" data-tag="sugarfree" onclick="toggleTagFilter('sugarfree', this)">🍃 Shakarsiz</button>
+            <button class="diet-chip" data-tag="highcaf" onclick="toggleTagFilter('highcaf', this)">⚡ Kuchli Kofein</button>
+          </div>
+        </div>
+
+        <!-- Direct Promo Box -->
+        <div style="background:var(--bg-elevated); padding:16px; border-radius:var(--radius-md); border:1px dashed var(--border-strong);">
+          <h5 style="font-size:0.9rem; margin-bottom:4px; color:var(--accent-primary);">🎁 AZ1K15 Promo-Kodi</h5>
+          <p style="font-size:0.78rem; color:var(--text-secondary); margin-bottom:10px;">
+            Savatda AZ1K15 kodini kiriting va barcha menyuga 15% chegirma oling!
+          </p>
+          <button class="btn-outline" style="width:100%; justify-content:center; padding:8px;" onclick="copyPromoCode('AZ1K15')">
+            Kodni Nusxalash
+          </button>
+        </div>
+      </aside>
+
+      <!-- RIGHT MAIN CATALOG CONTENT -->
+      <div>
+        <div class="catalog-toolbar">
+          <div class="toolbar-left">
+            <span data-i18n="showing_lbl">Topilgan mahsulotlar:</span>
+            <strong id="foundCountText">24</strong> ta
+          </div>
+
+          <div class="toolbar-right">
+            <select class="sort-select" id="catalogSortSelect" onchange="handleSort(this.value)">
+              <option value="popular">Saralash: Mashhurlari</option>
+              <option value="price_asc">Narx: Arzondan qimmatga</option>
+              <option value="price_desc">Narx: Qimmatdan arzonga</option>
+              <option value="cal_asc">Kaloriya: Eng yengillari</option>
+              <option value="rating_desc">Reyting: 5.0 yulduzlilar</option>
+            </select>
+
+            <div class="view-toggle">
+              <button class="view-btn active" id="gridViewBtn" onclick="setViewMode('grid')" title="Grid ko'rinish">
+                <i class="ri-layout-grid-line"></i>
+              </button>
+              <button class="view-btn" id="listViewBtn" onclick="setViewMode('list')" title="Ro'yxat ko'rinish">
+                <i class="ri-list-check-2"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 24 Products Grid -->
+        <div class="catalog-products-grid" id="catalogProductsGrid"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       B2B / OFFICE COFFEE SUBSCRIPTION SECTION (TELEGRAM INTEGRATED)
+       ======================================================================== -->
+  <section class="b2b-section">
+    <div class="container">
+      <div class="b2b-card">
+        <div>
+          <span class="section-kicker">B2B Corporate & Office Coffee</span>
+          <h2 class="section-title" style="margin-bottom: 12px;" data-i18n="b2b_title">
+            Ofisingiz Uchun Yangi Qovurilgan Qahva va Qahva-Mashina Ijarasi
+          </h2>
+          <p style="color: var(--text-secondary); font-size: 0.92rem;">
+            IT-kompaniyalar, banklar, avtosalonlar va biznes-markazlar uchun har oy yangi qovurilgan Specialty Arabica donlarini ulgurji narxda yetkazib beramiz.
+          </p>
+
+          <div class="b2b-perks">
+            <div class="b2b-perk">
+              <i class="ri-Percent-line"></i>
+              <h5>-30% Korporativ Narx</h5>
+              <p>5 kg dan boshlab ulgurji chegirmalar</p>
+            </div>
+            <div class="b2b-perk">
+              <i class="ri-settings-5-line"></i>
+              <h5>Bepul Qahva-Mashina</h5>
+              <p>Oyiga 12 kg qahva olganda Simonelli/Jura mashinasi bepul</p>
+            </div>
+          </div>
+        </div>
+
+        <form onsubmit="submitB2BRequestToTelegram(event)">
+          <h4 style="font-size:1.1rem; margin-bottom:14px; color:var(--accent-primary);">
+            <i class="ri-telegram-fill"></i> Korporativ Taklif Olish (Telegram Botga)
+          </h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Kompaniya nomi *</label>
+              <input type="text" id="b2bCompany" class="form-control" placeholder="Masalan: Az1k Digital Studio" required />
+            </div>
+            <div class="form-group">
+              <label>Mas’ul shaxs va Telefon *</label>
+              <input type="tel" id="b2bPhone" class="form-control" placeholder="+998 90 123 45 67" required />
+            </div>
+            <div class="form-group">
+              <label>Oylik qahva hajmi *</label>
+              <select id="b2bVolume" class="form-control" required>
+                <option value="5 - 10 kg / oyiga">5 – 10 kg / oyiga (Kichik ofis)</option>
+                <option value="10 - 25 kg / oyiga">10 – 25 kg / oyiga + Qahva-mashina</option>
+                <option value="25+ kg / oyiga">25+ kg / oyiga (Katta korporatsiya)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Degustatsiya to‘plami *</label>
+              <select id="b2bSample" class="form-control" required>
+                <option value="Bepul Sample Box kerak">Ha, bepul Sample Box yuboring</option>
+                <option value="Faqat прайс-лист kerak">Faqat ulgurji narxlar ro‘yxati</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary" id="b2bSubmitBtn" style="width:100%; justify-content:center;">
+            <i class="ri-send-plane-fill"></i>
+            <span>Korporativ Arizani Telegram Botga Yuborish</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand" style="margin-bottom: 16px;">
+            <div class="brand-icon"><i class="ri-cup-fill"></i></div>
+            <div class="brand-text">
+              <span class="brand-title">NOIR & BEAN</span>
+              <span class="brand-subtitle">Specialty Cafe & Market</span>
+            </div>
+          </div>
+          <p style="color: var(--text-secondary); font-size: 0.88rem;">
+            Toshkentdagi eng sifatli Specialty qahvaxona va artisanal qandolatchilik online do‘koni.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Sahifalar</h4>
+          <div class="footer-links">
+            <a href="index.html">1. Bosh sahifa (Vitirina)</a>
+            <a href="menu.html">2. To‘liq Menyu & Filtrlar</a>
+            <a href="about.html">3. Kafe haqida & Filiallar</a>
+            <a href="checkout.html">4. Savat & Rasmiylashtirish</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Tezkor Filtrlar</h4>
+          <div class="footer-links">
+            <a href="#catalogProductsGrid" onclick="setCategory('hot_coffee')">Issiq Specialty Qahvalar</a>
+            <a href="#catalogProductsGrid" onclick="setCategory('iced_drinks')">Muzdek Bar & Matcha</a>
+            <a href="#catalogProductsGrid" onclick="setCategory('bakery')">San-Sebastyan & Kruassanlar</a>
+            <a href="#catalogProductsGrid" onclick="setCategory('beans')">Qahva Donlari va V60</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Filiallarimiz</h4>
+          <p style="color: var(--text-secondary); font-size: 0.86rem; margin-bottom: 8px;">
+            📍 Tashkent City Boulevard 14
+          </p>
+          <p style="color: var(--text-secondary); font-size: 0.86rem; margin-bottom: 8px;">
+            📍 Shayxontohur, Navoiy ko‘chasi 22
+          </p>
+          <p style="color: var(--text-secondary); font-size: 0.86rem;">
+            📞 +998 (71) 200-77-88
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 NOIR & BEAN Roastery. Sahifa 2/4 (menu.html)</span>
+        <span>Synced with LocalStorage & Telegram Bot API</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       SHARED BACKDROP, WISHLIST DRAWER, CART DRAWER & TELEGRAM MODAL
+       ======================================================================== -->
+  <div class="backdrop" id="globalBackdrop" onclick="closeAllDrawersAndModals()"></div>
+
+  <aside class="drawer" id="wishlistDrawer">
+    <div class="drawer-header">
+      <h3>
+        <i class="ri-heart-3-fill" style="color: var(--danger);"></i>
+        <span data-i18n="wishlist_title">Saqlangan Tovarlar</span>
+      </h3>
+      <button class="icon-btn" onclick="closeAllDrawersAndModals()"><i class="ri-close-line"></i></button>
+    </div>
+    <div class="drawer-body" id="wishlistItemsContainer"></div>
+    <div class="drawer-footer">
+      <button class="btn-outline" style="width:100%; justify-content:center;" onclick="moveAllWishlistToCart()">
+        <i class="ri-shopping-cart-2-line"></i>
+        <span>Barchasini Savatga O‘tkazish</span>
+      </button>
+    </div>
+  </aside>
+
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3>
+        <i class="ri-shopping-basket-2-fill" style="color: var(--accent-primary);"></i>
+        <span data-i18n="cart_title">Savatdagi Tovarlar</span>
+      </h3>
+      <button class="icon-btn" onclick="closeAllDrawersAndModals()"><i class="ri-close-line"></i></button>
+    </div>
+    <div class="drawer-body" id="cartItemsContainer"></div>
+    <div class="drawer-footer">
+      <div style="display:flex; gap:8px; margin-bottom:14px;">
+        <input type="text" id="promoCodeInput" class="form-control" style="flex:1; padding:8px 12px;" placeholder="Promo-kod (AZ1K15)" />
+        <button class="btn-outline" style="padding:8px 14px;" onclick="applyPromoCode()">OK</button>
+      </div>
+      <div class="summary-line">
+        <span>Tovarlar summasi:</span>
+        <strong id="cartSubtotalText">0 UZS</strong>
+      </div>
+      <div class="summary-line">
+        <span>Chegirma:</span>
+        <strong id="cartDiscountText" style="color: var(--success);">0 UZS</strong>
+      </div>
+      <div class="summary-line">
+        <span>Yetkazib berish:</span>
+        <strong id="cartDeliveryText">15,000 UZS</strong>
+      </div>
+      <div class="summary-line total">
+        <span>Jami to‘lov:</span>
+        <strong id="cartTotalText" style="color: var(--accent-primary);">0 UZS</strong>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <a href="checkout.html" class="btn-outline" style="justify-content:center; text-align:center;">
+          Savat sahifasi
+        </a>
+        <button class="btn-primary" style="justify-content:center; padding:11px 14px;" onclick="openCheckoutModal()">
+          <i class="ri-telegram-fill"></i> Tezkor Xarid
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Quick View Modal -->
+  <div class="modal" id="quickViewModal">
+    <div class="modal-card" id="quickViewContent"></div>
+  </div>
+
+  <!-- Telegram Order Checkout Modal -->
+  <div class="modal" id="checkoutModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <h3 style="font-family:var(--font-display); font-size:1.75rem;">
+          <i class="ri-telegram-fill" style="color:var(--accent-primary);"></i>
+          <span>Telegram Bot Orqali Buyurtma</span>
+        </h3>
+        <button class="icon-btn" onclick="closeAllDrawersAndModals()"><i class="ri-close-line"></i></button>
+      </div>
+
+      <form onsubmit="submitOrderToTelegramBot(event)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Ismingiz *</label>
+            <input type="text" id="orderCustomerName" class="form-control" placeholder="Ismingiz" required />
+          </div>
+          <div class="form-group">
+            <label>Telefon raqamingiz *</label>
+            <input type="tel" id="orderCustomerPhone" class="form-control" placeholder="+998 90 123 45 67" required />
+          </div>
+          <div class="form-group">
+            <label>Yetkazish usuli *</label>
+            <select id="orderType" class="form-control" required>
+              <option value="Kuryer orqali yetkazish">🛵 Kuryer orqali yetkazish</option>
+              <option value="Filialdan olib ketish">🛍 Filialdan olib ketish</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>To‘lov usuli *</label>
+            <select id="orderPayment" class="form-control" required>
+              <option value="Click / Payme">💳 Click / Payme</option>
+              <option value="Uzcard / Humo terminal">💳 Kuryerga karta orqali</option>
+              <option value="Naqd pul">💵 Naqd pul</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>To‘liq manzil *</label>
+            <input type="text" id="orderAddress" class="form-control" placeholder="Tuman, ko'cha, uy va xonadon..." required />
+          </div>
+          <div class="form-group full">
+            <label>Barista uchun izoh</label>
+            <input type="text" id="orderComment" class="form-control" placeholder="Masalan: dolchin ko'proq bo'lsin..." />
+          </div>
+        </div>
+
+        <div style="background:var(--bg-elevated); padding:14px 18px; border-radius:var(--radius-sm); margin-bottom:18px; display:flex; justify-content:space-between;">
+          <span>Yakuniy to‘lov summasi:</span>
+          <strong id="modalFinalPrice" style="color:var(--accent-primary); font-size:1.25rem;">0 UZS</strong>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submitOrderBtn" style="width:100%; justify-content:center;">
+          <i class="ri-send-plane-2-fill"></i>
+          <span>Tasdiqlash va Telegram Botga Yuborish</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ========================================================================
+       SENIOR JAVASCRIPT ENGINE FOR MENU.HTML (24 PRODUCTS + 4 COMBOS)
+       ======================================================================== -->
+  <script>
+    const TELEGRAM_BOT_TOKEN = "9278006127:AAHIwnV9rNLtlZmPNmWrhVTBeFHKMSjY3dE";
+    const TELEGRAM_CHAT_ID = "8731329676";
+
+    /* ========================================================================
+       1. 4 CURATED BARISTA COMBO BOXES (UNIQUE IMAGES)
+       ======================================================================== */
+    const COMBOS_DB = [
+      {
+        id: "combo-1",
+        price: 59000,
+        oldPrice: 71000,
+        saveText: "-17% FOYDA",
+        calories: 475,
+        caffeine: 150,
+        protein: 11,
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Parisian Morning Duo (Spanish Latte + Pista Kruassan)",
+          ru: "Парижское Утро (Испанский Латте + Фисташковый Круассан)",
+          en: "Parisian Morning Duo (Spanish Latte + Pistachio Croissant)"
+        },
+        desc: {
+          uz: "Issiq Spanish Latte (M) va yangi uzilgan Eron pistali fransuz kruassani to‘plami.",
+          ru: "Горячий Испанский латте и свежий круассан с фисташковым ганашем.",
+          en: "Hot Spanish Latte paired with our signature pistachio ganache butter croissant."
+        }
+      },
+      {
+        id: "combo-2",
+        price: 98000,
+        oldPrice: 120000,
+        saveText: "-22,000 UZS",
+        calories: 615,
+        caffeine: 165,
+        protein: 24,
+        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Fitness & Energy Brunch (Avokado Losos Tost + Matcha)",
+          ru: "Фитнес-Бранч (Авокадо-тост с лососем + Айс Матча)",
+          en: "Fitness Brunch Set (Salmon Avocado Toast + Iced Matcha)"
+        },
+        desc: {
+          uz: "Norvegiya lososli avokado-tost, pashot tuxumi va Yaponiya Uji Matcha ichimligi.",
+          ru: "Тост с норвежским лососем и яйцом пашот + церемониальный матча.",
+          en: "Sourdough salmon avocado toast with poached egg + ceremonial iced matcha."
+        }
+      },
+      {
+        id: "combo-3",
+        price: 145000,
+        oldPrice: 174000,
+        saveText: "2 KISHILIK SET",
+        calories: 890,
+        caffeine: 280,
+        protein: 18,
+        image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Romantic Date Box (2 ta Raf + San-Sebastyan + Tiramisu)",
+          ru: "Бокс для двоих (2 Рафа + Сан-Себастьян + Тирамису)",
+          en: "Couple Dessert Box (2 Raf Coffees + Basque Cheesecake + Tiramisu)"
+        },
+        desc: {
+          uz: "Ikki kishilik shirin uchrashuv uchun 2 ta Pista Raf va 2 xil bestseller desertimiz.",
+          ru: "Идеальный сет на двоих: 2 фисташковых рафа и 2 фирменных десерта.",
+          en: "Two pistachio white-chocolate Rafs paired with Basque cheesecake and Tiramisu."
+        }
+      },
+      {
+        id: "combo-4",
+        price: 215000,
+        oldPrice: 258000,
+        saveText: "HOME BARISTA",
+        calories: 20,
+        caffeine: 950,
+        protein: 2,
+        image: "https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Roastery Pack (Ethiopia 250g + Colombia 250g + Drip Box)",
+          ru: "Набор Кофемана (Эфиопия 250г + Колумбия 250г + Дрип-бокс)",
+          en: "Roastery Trio Pack (Ethiopia + Colombia Beans + Drip Box)"
+        },
+        desc: {
+          uz: "2 пачка yangi qovurilgan Specialty donlari va 10 ta paketli Drip-qahva sovg‘a qutisi.",
+          ru: "Две пачки зернового спешелти кофе и коробка дрип-пакетов из 10 стран.",
+          en: "Two 250g bags of specialty whole beans plus our 10-pack single-origin drip box."
+        }
+      }
+    ];
+
+    /* ========================================================================
+       2. FULL 24 PRODUCTS CATALOG (24 COMPLETELY UNIQUE UNSPLASH PHOTOS)
+       ======================================================================== */
+    const PRODUCTS_DB = [
+      {
+        id: "nb-101",
+        category: "hot_coffee",
+        badge: "hit",
+        tags: ["hit", "highcaf"],
+        price: 36000,
+        oldPrice: 42000,
+        calories: "185 kkal",
+        caffeineMg: 150,
+        proteinG: 7,
+        prepTime: "4 daq",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Spanish Latte (Quyultirilgan Sutli)",
+          ru: "Испанский Латте (со сгущенкой)",
+          en: "Spanish Latte (Condensed Milk)"
+        },
+        desc: {
+          uz: "Ikki hissa Efiopiya espressosi, teksturalangan fermer suti va tabiiy karamelizatsiyalangan quyultirilgan sut.",
+          ru: "Двойной эспрессо из Эфиопии, текстурированное фермерское молоко и натуральная сгущенка.",
+          en: "Double Ethiopian espresso shot, textured farm milk, and rich caramelized condensed milk."
+        }
+      },
+      {
+        id: "nb-102",
+        category: "hot_coffee",
+        badge: "chef",
+        tags: ["hit"],
+        price: 39000,
+        oldPrice: null,
+        calories: "210 kkal",
+        caffeineMg: 130,
+        proteinG: 6,
+        prepTime: "5 daq",
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Pista va Oq Shokoladli Raf",
+          ru: "Фисташковый Раф с белым шоколадом",
+          en: "Pistachio & White Chocolate Raf"
+        },
+        desc: {
+          uz: "Eron pistasi pastasi, belgiya oq shokoladi va qaymoq bilan ko‘pirtirilgan baxmaldek yumshoq qahva.",
+          ru: "Нежный сливочный раф, взбитый с иранской фисташковой пастой и бельгийским шоколадом.",
+          en: "Velvety cream coffee steamed with Iranian pistachio paste and Belgian white chocolate."
+        }
+      },
+      {
+        id: "nb-103",
+        category: "hot_coffee",
+        badge: "new",
+        tags: ["sugarfree", "highcaf"],
+        price: 32000,
+        oldPrice: null,
+        calories: "120 kkal",
+        caffeineMg: 185,
+        proteinG: 6,
+        prepTime: "3 daq",
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Flat White Colombia Supremo",
+          ru: "Флэт Уайт Колумбия Супремо",
+          en: "Flat White Colombia Supremo"
+        },
+        desc: {
+          uz: "Kuchli ristretto dueti va yupqa mikro-ko‘pikli sut. Haqiqiy qahva ta’mini sevuvchilar uchun.",
+          ru: "Двойной ристретто и тонкий слой микропены. Насыщенный шоколадно-ореховый профиль.",
+          en: "Double ristretto shot topped with silky micro-foam milk for a bold chocolaty finish."
+        }
+      },
+      {
+        id: "nb-117",
+        category: "hot_coffee",
+        badge: "chef",
+        tags: ["vegan", "sugarfree", "highcaf"],
+        price: 42000,
+        oldPrice: null,
+        calories: "10 kkal",
+        caffeineMg: 195,
+        proteinG: 1,
+        prepTime: "5 daq",
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Hario V60 Pour-Over Kenya AA",
+          ru: "Воронка V60 Пуровер Кения АА",
+          en: "Hario V60 Hand-Brewed Kenya AA"
+        },
+        desc: {
+          uz: "Qo‘lda voronka orqali damlangan mualliflik filtr-qahva. Qora smorodina va yovvoyi rezavorlar notasi.",
+          ru: "Альтернативное заваривание через воронку Hario V60. Яркие ноты черной смородины и гибискуса.",
+          en: "Manual pour-over extraction highlighting vibrant blackcurrant and hibiscus aromatics."
+        }
+      },
+      {
+        id: "nb-118",
+        category: "hot_coffee",
+        badge: "hit",
+        tags: ["hit", "vegan"],
+        price: 38000,
+        oldPrice: 43000,
+        calories: "155 kkal",
+        caffeineMg: 140,
+        proteinG: 4,
+        prepTime: "4 daq",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Bodom Sutli Salted Caramel Latte",
+          ru: "Латте Соленая Карамель на миндальном",
+          en: "Almond Milk Salted Caramel Latte"
+        },
+        desc: {
+          uz: "100% o‘simlik bodom suti, dengiz tuzli uy karameli va yumshoq Efiopiya espressosi.",
+          ru: "Растительное миндальное молоко, домашняя соленая карамель и мягкий эспрессо.",
+          en: "Roasted almond milk, house-made sea salt caramel, and smooth Ethiopian espresso."
+        }
+      },
+      {
+        id: "nb-119",
+        category: "hot_coffee",
+        badge: "new",
+        tags: ["sugarfree", "highcaf", "vegan"],
+        price: 26000,
+        oldPrice: null,
+        calories: "15 kkal",
+        caffeineMg: 210,
+        proteinG: 1,
+        prepTime: "2 daq",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Double Espresso & San Pellegrino Set",
+          ru: "Двойной Эспрессо + San Pellegrino",
+          en: "Double Doppio Espresso & Sparkling Water"
+        },
+        desc: {
+          uz: "Klassik ikki hissa quyuq Doppio espressosi gazlangan mineral suv va belgiya trufeli bilan.",
+          ru: "Классический двойной эспрессо с бокалом минеральной воды для очищения рецепторов.",
+          en: "Rich double espresso shot served with chilled sparkling mineral water."
+        }
+      },
+      {
+        id: "nb-104",
+        category: "iced_drinks",
+        badge: "hit",
+        tags: ["hit", "vegan"],
+        price: 41000,
+        oldPrice: 46000,
+        calories: "165 kkal",
+        caffeineMg: 75,
+        proteinG: 4,
+        prepTime: "4 daq",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Iced Ceremonial Matcha Qulupnayli",
+          ru: "Айс Церемониальный Матча с клубникой",
+          en: "Iced Strawberry Ceremonial Matcha"
+        },
+        desc: {
+          uz: "Yaponiya Uji provinsiyasidan keltirilgan oliy navli ko‘k choy, yangi qulupnay pyuresi va bodom suti.",
+          ru: "Японский церемониальный матча из Удзи со свежим клубничным пюре и миндальным молоком.",
+          en: "Premium Uji ceremonial grade matcha layered over fresh strawberry puree and almond milk."
+        }
+      },
+      {
+        id: "nb-105",
+        category: "iced_drinks",
+        badge: "new",
+        tags: ["vegan", "highcaf"],
+        price: 38000,
+        oldPrice: null,
+        calories: "140 kkal",
+        caffeineMg: 150,
+        proteinG: 2,
+        prepTime: "4 daq",
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Bumble Espresso (Apelsin & Karamel)",
+          ru: "Бамбл Эспрессо (Апельсин и карамель)",
+          en: "Iced Bumble Espresso (Orange & Caramel)"
+        },
+        desc: {
+          uz: "Yangi siqilgan apelsin sharbati, tabiiy karamel siropi va muz ustiga quyilgan ikki hissa espresso.",
+          ru: "Свежевыжатый апельсиновый сок, карамельный сироп и двойной шот эспрессо со льдом.",
+          en: "Freshly squeezed orange juice, artisan caramel syrup, and double espresso over crystal ice."
+        }
+      },
+      {
+        id: "nb-106",
+        category: "iced_drinks",
+        badge: "chef",
+        tags: ["vegan", "highcaf"],
+        price: 37000,
+        oldPrice: null,
+        calories: "95 kkal",
+        caffeineMg: 150,
+        proteinG: 1,
+        prepTime: "3 daq",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Espresso Tonic Rosemary & Grapefruit",
+          ru: "Эспрессо-Тоник Розмарин и Грейпфрут",
+          en: "Rosemary Grapefruit Espresso Tonic"
+        },
+        desc: {
+          uz: "Premium Indian tonik, pushti greypfrut bo‘lagi, yangi rozmarin shoxchasi va sovutilgan espresso.",
+          ru: "Премиальный тоник, розовый грейпфрут, веточка свежего розмарина и яркий эспрессо.",
+          en: "Botanical Indian tonic, ruby grapefruit slice, fresh rosemary sprig, and bright espresso."
+        }
+      },
+      {
+        id: "nb-120",
+        category: "iced_drinks",
+        badge: "chef",
+        tags: ["vegan", "sugarfree", "highcaf"],
+        price: 39000,
+        oldPrice: null,
+        calories: "15 kkal",
+        caffeineMg: 230,
+        proteinG: 1,
+        prepTime: "2 daq",
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "18-Soatlik Nitro Cold Brew Apelsin Sedrasi bilan",
+          ru: "Нитро Колд Брю 18-часовой выдержки",
+          en: "18-Hour Steeped Nitro Cold Brew"
+        },
+        desc: {
+          uz: "18 soat sovuq suvda damlangan Efiopiya qahvasi, azot bilan boyitilgan quyuq kremli tekstura.",
+          ru: "Холодная экстракция 18 часов с бархатной азотной пеной и цедрой сицилийского апельсина.",
+          en: "18-hour cold-steeped single origin infused with nitrogen for a cascading velvety head."
+        }
+      },
+      {
+        id: "nb-121",
+        category: "iced_drinks",
+        badge: "new",
+        tags: ["vegan"],
+        price: 36000,
+        oldPrice: null,
+        calories: "110 kkal",
+        caffeineMg: 0,
+        proteinG: 1,
+        prepTime: "3 daq",
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1499638673689-79a0b5115d87?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Marakuyya va Mango Muzdek Limonadi",
+          ru: "Тропический лимонад Маракуйя-Манго",
+          en: "Passionfruit & Alphonso Mango Cooler"
+        },
+        desc: {
+          uz: "Tabiiy marakuyya urug‘lari, Alphonso mango pyuresi, yalpiz barglari va gazlangan buloq suvi.",
+          ru: "Натуральное пюре манго Альфонсо, маракуйя, свежая мята и родниковая вода.",
+          en: "Real passionfruit pulp, Alphonso mango puree, garden mint, and sparkling spring water."
+        }
+      },
+      {
+        id: "nb-107",
+        category: "bakery",
+        badge: "hit",
+        tags: ["hit"],
+        price: 48000,
+        oldPrice: 55000,
+        calories: "340 kkal",
+        caffeineMg: 15,
+        proteinG: 8,
+        prepTime: "2 daq",
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "San-Sebastyan Kuydirilgan Chizkeyki",
+          ru: "Баскский чизкейк Сан-Себастьян",
+          en: "Basque Burnt Cheesecake + Belgian Chocolate"
+        },
+        desc: {
+          uz: "Ispancha retsept bo‘yicha tayyorlangan kremli chizkeyk, issiq Belgiya sutli shokoladi sousi bilan.",
+          ru: "Тающий во рту кремовый чизкейк с подачей из теплого бельгийского молочного шоколада.",
+          en: "Creamy caramelized Basque cheesecake served with warm melted Belgian chocolate sauce."
+        }
+      },
+      {
+        id: "nb-108",
+        category: "bakery",
+        badge: "chef",
+        tags: ["hit"],
+        price: 35000,
+        oldPrice: null,
+        calories: "290 kkal",
+        caffeineMg: 0,
+        proteinG: 6,
+        prepTime: "3 daq",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Fransuz Kruassani Pista Kremli",
+          ru: "Французский круассан с фисташковым кремом",
+          en: "Artisan Pistachio Cream Croissant"
+        },
+        desc: {
+          uz: "82.5% Yangi Zelandiya sariyog‘ida qavatlangan qarsildoq xamir va ichida quyuq pista ganashi.",
+          ru: "Хрустящее слоеное тесто на новозеландском масле с начинкой из фисташкового ганаша.",
+          en: "Flaky butter pastry filled with rich pistachio white-chocolate ganache and crushed nuts."
+        }
+      },
+      {
+        id: "nb-109",
+        category: "bakery",
+        badge: "new",
+        tags: ["highcaf"],
+        price: 44000,
+        oldPrice: null,
+        calories: "310 kkal",
+        caffeineMg: 65,
+        proteinG: 7,
+        prepTime: "3 daq",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Klassik Italiya Tiramisusi (Mascarpone)",
+          ru: "Классический Итальянский Тирамису",
+          en: "Authentic Italian Mascarpone Tiramisu"
+        },
+        desc: {
+          uz: "Savoyardi pechenyelari, yangi espresso, Italiya Maskarpone pishlog‘i va tabiiy kakao kukuni.",
+          ru: "Печенье савоярди, пропитанное эспрессо, воздушный крем маскарпоне и какао.",
+          en: "Espresso-soaked ladyfingers layered with whipped Italian Mascarpone cream and cocoa."
+        }
+      },
+      {
+        id: "nb-110",
+        category: "bakery",
+        badge: "hit",
+        tags: ["hit"],
+        price: 33000,
+        oldPrice: 38000,
+        calories: "320 kkal",
+        caffeineMg: 0,
+        proteinG: 5,
+        prepTime: "4 daq",
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Issiq Sinnabon Dolchin va Pekan Yong‘oqli",
+          ru: "Горячий Синнабон с корицей и пеканом",
+          en: "Warm Pecan & Cream Cheese Cinnabon"
+        },
+        desc: {
+          uz: "Seylon dolchini, jigarrang shakar, qaymoqli pishloq glazuri va qovurilgan pekan yong‘oqlari.",
+          ru: "Ароматная булочка с цейлонской корицей, сливочным крем-чизом и жареным пеканом.",
+          en: "Soft cinnamon roll topped with warm cream cheese frosting and toasted pecan nuts."
+        }
+      },
+      {
+        id: "nb-122",
+        category: "bakery",
+        badge: "chef",
+        tags: ["hit"],
+        price: 46000,
+        oldPrice: null,
+        calories: "330 kkal",
+        caffeineMg: 25,
+        proteinG: 6,
+        prepTime: "3 daq",
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Belgiya Qora Shokoladli & Malinali Tart",
+          ru: "Тарт с бельгийским темным шоколадом и малиной",
+          en: "Belgian 70% Dark Chocolate & Raspberry Tart"
+        },
+        desc: {
+          uz: "Bodom unidan qumoq korj, Callebaut 70% shokolad ganashi va yangi malina rezavorlari.",
+          ru: "Песочная основа из миндальной муки, ганаш Callebaut 70% и свежая садовая малина.",
+          en: "Almond sable crust filled with silky Callebaut 70% dark chocolate ganache and fresh raspberries."
+        }
+      },
+      {
+        id: "nb-111",
+        category: "kitchen",
+        badge: "hit",
+        tags: ["hit", "sugarfree"],
+        price: 68000,
+        oldPrice: 75000,
+        calories: "420 kkal",
+        caffeineMg: 0,
+        proteinG: 22,
+        prepTime: "12 daq",
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Avokado Tost Norvegiya Lososi va Pashot bilan",
+          ru: "Авокадо-тост с норвежским лососем и пашот",
+          en: "Sourdough Avocado Toast & Norwegian Salmon"
+        },
+        desc: {
+          uz: "Artisanal briosh noni, Hass avokado guakamolesi, dudlangan losos, pashot tuxumi va golland sousi.",
+          ru: "Ремесленный хлеб на закваске, гуакамоле из авокадо Хасс, слабосоленый лосось и яйцо пашот.",
+          en: "Toasted artisan sourdough, smashed Hass avocado, smoked salmon, poached egg, and hollandaise."
+        }
+      },
+      {
+        id: "nb-112",
+        category: "kitchen",
+        badge: "chef",
+        tags: ["hit", "sugarfree"],
+        price: 62000,
+        oldPrice: null,
+        calories: "480 kkal",
+        caffeineMg: 0,
+        proteinG: 26,
+        prepTime: "14 daq",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Truffle & Roast Beef Kruassan-Sendvich",
+          ru: "Круассан-сэндвич с ростбифом и трюфелем",
+          en: "Truffle Roast Beef Croissant Sandwich"
+        },
+        desc: {
+          uz: "Yumshoq mol go‘shti rostbifi, tryufel mayonezi, Chedder pishlog‘i va rukkola barglari.",
+          ru: "Сочный ростбиф прайм, трюфельный айоли, выдержанный чеддер и свежая руккола в круассане.",
+          en: "Prime tender roast beef, black truffle aioli, aged cheddar, and wild arugula in a butter croissant."
+        }
+      },
+      {
+        id: "nb-113",
+        category: "kitchen",
+        badge: "new",
+        tags: [],
+        price: 54000,
+        oldPrice: null,
+        calories: "390 kkal",
+        caffeineMg: 0,
+        proteinG: 9,
+        prepTime: "10 daq",
+        rating: 4.8,
+        image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Belgiya Vaflisi Rezavorlar va Maskarpone bilan",
+          ru: "Бельгийские вафли с ягодами и маскарпоне",
+          en: "Belgian Waffles with Berries & Maple Syrup"
+        },
+        desc: {
+          uz: "Issiq qarsildoq vafli, yangi qulupnay, golubika, zarang siropi va vanilli maskarpone kremi.",
+          ru: "Хрустящие вафли со свежей клубникой, голубикой, кленовым сиропом и кремом маскарпоне.",
+          en: "Golden crisp waffles topped with fresh strawberries, blueberries, maple syrup, and mascarpone."
+        }
+      },
+      {
+        id: "nb-123",
+        category: "kitchen",
+        badge: "chef",
+        tags: ["sugarfree", "vegan"],
+        price: 58000,
+        oldPrice: null,
+        calories: "310 kkal",
+        caffeineMg: 0,
+        proteinG: 16,
+        prepTime: "11 daq",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Kinoa, Avokado va Gril Sabzavotli Green Bowl",
+          ru: "Грин-Боул с киноа, авокадо и овощами гриль",
+          en: "Superfood Quinoa & Avocado Green Bowl"
+        },
+        desc: {
+          uz: "Organik kinoa, edamame loviyasi, avokado, cherri pomidorlari va kunjutli yapon sousi.",
+          ru: "Органическое киноа, бобы эдамаме, спелый авокадо, томаты черри и кунжутный дрессинг.",
+          en: "Organic tri-color quinoa, edamame beans, avocado, cherry tomatoes, and roasted sesame dressing."
+        }
+      },
+      {
+        id: "nb-114",
+        category: "beans",
+        badge: "hit",
+        tags: ["hit", "vegan", "sugarfree", "highcaf"],
+        price: 145000,
+        oldPrice: 165000,
+        calories: "250 g",
+        caffeineMg: 400,
+        proteinG: 0,
+        prepTime: "Don / Yanchilgan",
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Ethiopia Yirgacheffe Specialty Donlari (250g)",
+          ru: "Зерновой кофе Эфиопия Иргачефф (250г)",
+          en: "Ethiopia Yirgacheffe Specialty Beans (250g)"
+        },
+        desc: {
+          uz: "SCA 87.5 ball. Bergamot, oq shaftoli va yasmin gullari ifori. Filtr va espresso uchun ideal.",
+          ru: "Оценка SCA 87.5. Ноты бергамота, белого персика и жасмина. Свежая обжарка.",
+          en: "SCA 87.5 score. Floral jasmine, bergamot, and white peach notes. Freshly roasted in Tashkent."
+        }
+      },
+      {
+        id: "nb-115",
+        category: "beans",
+        badge: "chef",
+        tags: ["vegan", "sugarfree", "highcaf"],
+        price: 138000,
+        oldPrice: null,
+        calories: "250 g",
+        caffeineMg: 420,
+        proteinG: 0,
+        prepTime: "Don / Yanchilgan",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Colombia Huila Dark Chocolate Donlari (250g)",
+          ru: "Зерновой кофе Колумбия Уила (250г)",
+          en: "Colombia Huila Reserve Coffee Beans (250g)"
+        },
+        desc: {
+          uz: "Quyuq shokolad, qovurilgan funduk va qizil olma kislotaliligi. Espresso mashinalar uchun 100% mos.",
+          ru: "Темный шоколад, жареный фундук и легкая яблочная кислинка. Идеально для эспрессо.",
+          en: "Dark chocolate, roasted hazelnut, and sweet red apple finish. Ideal for home espresso machines."
+        }
+      },
+      {
+        id: "nb-116",
+        category: "beans",
+        badge: "new",
+        tags: ["hit", "vegan", "sugarfree"],
+        price: 98000,
+        oldPrice: 115000,
+        calories: "10 ta paket",
+        caffeineMg: 300,
+        proteinG: 0,
+        prepTime: "Drip Box",
+        rating: 4.9,
+        image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Noir Drip Coffee Box (10 xil mamlakat to‘plami)",
+          ru: "Дрип-пакеты Noir Mix Box (10 шт)",
+          en: "Specialty Drip Coffee Gift Box (10 Packs)"
+        },
+        desc: {
+          uz: "Ofisda va sayohatda hech qanday uskunasiz 2 daqiqada haqiqiy filtr-qahva damlash uchun quti.",
+          ru: "Набор дрип-кофе из 10 сортов для заваривания в чашке дома, в офисе или в поездке.",
+          en: "Assorted box of 10 single-origin pour-over drip bags for effortless brewing anywhere."
+        }
+      },
+      {
+        id: "nb-124",
+        category: "beans",
+        badge: "chef",
+        tags: ["vegan", "sugarfree"],
+        price: 245000,
+        oldPrice: 275000,
+        calories: "To‘plam",
+        caffeineMg: 0,
+        proteinG: 0,
+        prepTime: "Barista Kit",
+        rating: 5.0,
+        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=700&q=80",
+        title: {
+          uz: "Hario V60 Keramik Voronka + Server + 100 Filtr",
+          ru: "Набор Hario V60 (Керамическая воронка + Сервер + Фильтры)",
+          en: "Hario V60 Ceramic Pour-Over Starter Kit"
+        },
+        desc: {
+          uz: "Yaponiyada ishlab chiqarilgan original Hario V60-02 keramik dripper, shisha choynak va 100 dona qog‘oz filtr.",
+          ru: "Оригинальный японский комплект для пуровера: воронка, стеклянный сервер и 100 фильтров.",
+          en: "Authentic Japanese ceramic V60 dripper, heatproof glass server, and 100 bleached paper filters."
+        }
+      }
+    ];
+
+    /* ========================================================================
+       3. MULTI-LANGUAGE TRANSLATIONS (UZ / RU / EN)
+       ======================================================================== */
+    const I18N = {
+      uz: {
+        topbar_open: "Barcha filiallar ochiq: 07:30 – 23:30",
+        topbar_free: "150,000 UZS dan yuqori buyurtmalarga yetkazish BEPUL",
+        topbar_promo: "15% chegirma promo-kodi:",
+        nav_home: "Bosh sahifa",
+        nav_menu: "Katalog & Menyu",
+        nav_about: "Kafe haqida & Filiallar",
+        nav_checkout: "Rasmiylashtirish",
+        search_placeholder: "24+ tovar ichidan qidirish...",
+        btn_cart: "Savat",
+        mhero_title: "To‘liq Kafe Menyusi va <span>Specialty Coffee</span> Market",
+        mhero_desc: "24 xil mualliflik ichimliklari, yangi uzilgan kruassanlar, issiq bistro nonushtalari hamda uy va ofis uchun qovurilgan 100% Arabica donlari.",
+        macro_title: "Savatingizdagi Kaloriya va Kofein Balansi",
+        macro_cal: "Jami Energiya",
+        macro_caf: "Kofein Miqdori",
+        macro_prot: "Oqsillar (Protein)",
+        combo_kicker: "Foydali To‘plamlar (-20% gacha)",
+        combo_title: "Barista Kombo-Setlar va Nonushta Bokslari",
+        side_cats: "Kategoriyalar",
+        side_reset: "Tozalash",
+        cat_all: "Barcha Tovarlar",
+        cat_hot: "Issiq Qahva & Pour-Over",
+        cat_iced: "Muzdek Bar & Matcha",
+        cat_bakery: "Desert va Viyechka",
+        cat_kitchen: "Issiq Nonushta & Bistro",
+        cat_beans: "Qahva Donlari & Uskuna",
+        side_price: "Maksimal Narx",
+        side_tags: "Maxsus Filtrlar",
+        showing_lbl: "Topilgan mahsulotlar:",
+        add_to_cart: "Savatga",
+        b2b_title: "Ofisingiz Uchun Yangi Qovurilgan Qahva va Qahva-Mashina Ijarasi",
+        wishlist_title: "Saqlangan Tovarlar",
+        cart_title: "Savatdagi Tovarlar"
+      },
+      ru: {
+        topbar_open: "Все филиалы открыты: 07:30 – 23:30",
+        topbar_free: "Бесплатная доставка от 150,000 UZS",
+        topbar_promo: "Промокод на скидку 15%:",
+        nav_home: "Главная",
+        nav_menu: "Каталог и Меню",
+        nav_about: "О кафе и Филиалы",
+        nav_checkout: "Оформление",
+        search_placeholder: "Поиск среди 24+ позиций...",
+        btn_cart: "Корзина",
+        mhero_title: "Полное Меню Кафе и <span>Specialty Coffee</span> Маркет",
+        mhero_desc: "24 позиции авторских напитков, свежих круассанов, горячих завтраков и свежеобжаренной 100% Арабики для дома и офиса.",
+        macro_title: "Баланс Калорий и Кофеина в Корзине",
+        macro_cal: "Калорийность",
+        macro_caf: "Кофеин",
+        macro_prot: "Белки (Протеин)",
+        combo_kicker: "Выгодные Наборы (до -20%)",
+        combo_title: "Бариста Комбо-Сеты и Боксы Завтраков",
+        side_cats: "Категории",
+        side_reset: "Сбросить",
+        cat_all: "Все Товары",
+        cat_hot: "Горячий Кофе и Пуровер",
+        cat_iced: "Айс-Бар и Матча",
+        cat_bakery: "Десерты и Выпечка",
+        cat_kitchen: "Завтраки и Бистро",
+        cat_beans: "Кофе в Зернах и Аксессуары",
+        side_price: "Максимальная Цена",
+        side_tags: "Диетические Фильтры",
+        showing_lbl: "Найдено позиций:",
+        add_to_cart: "В корзину",
+        b2b_title: "Свежеобжаренный Кофе и Аренда Кофемашин для Офиса",
+        wishlist_title: "Избранные Товары",
+        cart_title: "Корзина Покупок"
+      },
+      en: {
+        topbar_open: "All branches open: 07:30 AM – 11:30 PM",
+        topbar_free: "FREE delivery on orders over 150,000 UZS",
+        topbar_promo: "15% OFF promo code:",
+        nav_home: "Home",
+        nav_menu: "Catalog & Menu",
+        nav_about: "About & Branches",
+        nav_checkout: "Checkout",
+        search_placeholder: "Search across 24+ items...",
+        btn_cart: "Cart",
+        mhero_title: "Full Cafe Menu & <span>Specialty Coffee</span> Market",
+        mhero_desc: "24 handcrafted beverages, flaky French pastries, gourmet bistro breakfasts, and freshly roasted 100% Arabica beans.",
+        macro_title: "Your Cart Calorie & Caffeine Tracker",
+        macro_cal: "Total Energy",
+        macro_caf: "Caffeine Load",
+        macro_prot: "Total Protein",
+        combo_kicker: "Curated Value Sets (Up to 20% OFF)",
+        combo_title: "Barista Combo Boxes & Morning Sets",
+        side_cats: "Categories",
+        side_reset: "Reset",
+        cat_all: "All Products",
+        cat_hot: "Hot Coffee & Pour-Over",
+        cat_iced: "Iced Bar & Matcha",
+        cat_bakery: "Bakery & Desserts",
+        cat_kitchen: "All-Day Breakfast",
+        cat_beans: "Coffee Beans & Gear",
+        side_price: "Max Price Filter",
+        side_tags: "Dietary & Feature Tags",
+        showing_lbl: "Showing items:",
+        add_to_cart: "Add to Cart",
+        b2b_title: "Office Coffee Subscriptions & Espresso Machine Rental",
+        wishlist_title: "Saved Favorites",
+        cart_title: "Your Shopping Cart"
+      }
+    };
+
+    /* ========================================================================
+       4. STATE MANAGEMENT (SHARED WITH INDEX.HTML VIA LOCALSTORAGE)
+       ======================================================================== */
+    let state = {
+      lang: localStorage.getItem("nb_lang") || "uz",
+      theme: localStorage.getItem("nb_theme") || "dark",
+      category: "all",
+      search: "",
+      maxPrice: 260000,
+      activeTags: [],
+      sortBy: "popular",
+      viewMode: "grid",
+      selectedSizes: {},
+      wishlist: JSON.parse(localStorage.getItem("nb_wishlist") || "[]"),
+      cart: JSON.parse(localStorage.getItem("nb_cart") || "[]"),
+      promoDiscountRate: 0,
+      promoCodeName: ""
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      applyTheme(state.theme);
+      setLanguage(state.lang);
+      renderCombos();
+      renderCatalog();
+      updateCartUI();
+      updateWishlistUI();
+    });
+
+    function formatUZS(num) {
+      return Number(num).toLocaleString("ru-RU") + " UZS";
+    }
+
+    function applyTheme(theme) {
+      state.theme = theme;
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("nb_theme", theme);
+      const icon = document.getElementById("themeIcon");
+      if (icon) icon.className = theme === "dark" ? "ri-sun-line" : "ri-moon-clear-line";
+    }
+
+    function toggleTheme() {
+      applyTheme(state.theme === "dark" ? "light" : "dark");
+    }
+
+    function setLanguage(lang) {
+      state.lang = lang;
+      localStorage.setItem("nb_lang", lang);
+
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.lang === lang);
+      });
+
+      const dict = I18N[lang] || I18N.uz;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const k = el.getAttribute("data-i18n");
+        if (dict[k]) el.innerHTML = dict[k];
+      });
+      document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const k = el.getAttribute("data-i18n-placeholder");
+        if (dict[k]) el.setAttribute("placeholder", dict[k]);
+      });
+
+      renderCombos();
+      renderCatalog();
+      updateCartUI();
+      updateWishlistUI();
+    }
+
+    /* ========================================================================
+       5. RENDER COMBO SETS
+       ======================================================================== */
+    function renderCombos() {
+      const grid = document.getElementById("combosGrid");
+      if (!grid) return;
+
+      grid.innerHTML = COMBOS_DB.map(c => `
+        <article class="combo-card">
+          <div class="combo-img">
+            <img src="${c.image}" alt="${c.title[state.lang]}" loading="lazy" />
+            <span class="combo-save-tag">${c.saveText}</span>
+          </div>
+          <div class="combo-body">
+            <h4>${c.title[state.lang]}</h4>
+            <p>${c.desc[state.lang]}</p>
+            <div class="combo-footer">
+              <div>
+                <span class="price-old">${formatUZS(c.oldPrice)}</span>
+                <strong class="price-current">${formatUZS(c.price)}</strong>
+              </div>
+              <button class="add-cart-btn" onclick="addComboToCart('${c.id}')">
+                <i class="ri-add-line"></i> Setni olish
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function addComboToCart(comboId) {
+      const c = COMBOS_DB.find(x => x.id === comboId);
+      if (!c) return;
+      const cartKey = `${c.id}_SET`;
+      const existing = state.cart.find(i => i.cartKey === cartKey);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push({
+          cartKey,
+          id: c.id,
+          title: c.title,
+          size: "COMBO",
+          price: c.price,
+          image: c.image,
+          qty: 1
+        });
+      }
+      localStorage.setItem("nb_cart", JSON.stringify(state.cart));
+      updateCartUI();
+      showToast(`🎁 "${c.title[state.lang]}" savatga qo'shildi!`);
+    }
+
+    /* ========================================================================
+       6. FILTERING, SORTING & RENDERING 24 PRODUCTS
+       ======================================================================== */
+    function setCategory(cat) {
+      state.category = cat;
+      document.querySelectorAll(".sidebar-cat-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.cat === cat);
+      });
+      renderCatalog();
+    }
+
+    function handleSearch(val) {
+      state.search = val;
+      renderCatalog();
+    }
+
+    function handlePriceSlider(val) {
+      state.maxPrice = Number(val);
+      document.getElementById("priceSliderLabel").textContent = formatUZS(val);
+      renderCatalog();
+    }
+
+    function toggleTagFilter(tag, btnEl) {
+      const idx = state.activeTags.indexOf(tag);
+      if (idx > -1) {
+        state.activeTags.splice(idx, 1);
+        btnEl.classList.remove("active");
+      } else {
+        state.activeTags.push(tag);
+        btnEl.classList.add("active");
+      }
+      renderCatalog();
+    }
+
+    function resetAllFilters() {
+      state.category = "all";
+      state.search = "";
+      state.maxPrice = 260000;
+      state.activeTags = [];
+      document.getElementById("menuSearchInput").value = "";
+      document.getElementById("maxPriceSlider").value = 260000;
+      document.getElementById("priceSliderLabel").textContent = formatUZS(260000);
+      document.querySelectorAll(".diet-chip").forEach(b => b.classList.remove("active"));
+      setCategory("all");
+    }
+
+    function handleSort(val) {
+      state.sortBy = val;
+      renderCatalog();
+    }
+
+    function setViewMode(mode) {
+      state.viewMode = mode;
+      document.getElementById("gridViewBtn").classList.toggle("active", mode === "grid");
+      document.getElementById("listViewBtn").classList.toggle("active", mode === "list");
+      document.getElementById("catalogProductsGrid").classList.toggle("list-view", mode === "list");
+    }
+
+    function selectSize(productId, label, addPrice) {
+      state.selectedSizes[productId] = { label, addPrice };
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const grid = document.getElementById("catalogProductsGrid");
+      if (!grid) return;
+
+      let list = PRODUCTS_DB.filter(p => {
+        if (state.category !== "all" && p.category !== state.category) return false;
+        if (p.price > state.maxPrice) return false;
+        if (state.search.trim() !== "") {
+          const q = state.search.toLowerCase();
+          const matchTitle = p.title[state.lang].toLowerCase().includes(q);
+          const matchDesc = p.desc[state.lang].toLowerCase().includes(q);
+          if (!matchTitle && !matchDesc) return false;
+        }
+        if (state.activeTags.length > 0) {
+          const hasAll = state.activeTags.every(t => p.tags.includes(t));
+          if (!hasAll) return false;
+        }
+        return true;
+      });
+
+      if (state.sortBy === "price_asc") list.sort((a, b) => a.price - b.price);
+      else if (state.sortBy === "price_desc") list.sort((a, b) => b.price - a.price);
+      else if (state.sortBy === "cal_asc") list.sort((a, b) => parseInt(a.calories) - parseInt(b.calories));
+      else if (state.sortBy === "rating_desc") list.sort((a, b) => b.rating - a.rating);
+
+      document.getElementById("foundCountText").textContent = list.length;
+      const dict = I18N[state.lang] || I18N.uz;
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align:center; padding: 60px 20px; background: var(--bg-card); border-radius: var(--radius-lg);">
+            <i class="ri-filter-off-line" style="font-size: 3rem; color: var(--accent-primary);"></i>
+            <h3 style="margin-top: 12px;">Tanlangan filtr bo‘yicha tovar topilmadi</h3>
+            <button class="btn-outline" style="margin-top: 14px;" onclick="resetAllFilters()">Filtrlarni tozalash</button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(product => {
+        const isLiked = state.wishlist.includes(product.id);
+        const sizeObj = state.selectedSizes[product.id] || { label: "M", addPrice: 0 };
+        const finalPrice = product.price + sizeObj.addPrice;
+        const badgeClass = product.badge === "hit" ? "badge-hit" : product.badge === "new" ? "badge-new" : "badge-chef";
+        const badgeText = product.badge === "hit" ? "BESTSELLER" : product.badge === "new" ? "YANGI" : "CHEF TANLOVI";
+
+        return `
+          <article class="product-card">
+            <div class="product-media">
+              <img src="${product.image}" alt="${product.title[state.lang]}" loading="lazy" />
+              <div class="product-badges">
+                <span class="badge-tag ${badgeClass}">${badgeText}</span>
+              </div>
+              <div class="product-actions-top">
+                <button class="like-btn ${isLiked ? 'liked' : ''}" onclick="toggleWishlist('${product.id}')">
+                  <i class="${isLiked ? 'ri-heart-3-fill' : 'ri-heart-3-line'}"></i>
+                </button>
+                <button class="quickview-btn" onclick="openQuickView('${product.id}')">
+                  <i class="ri-eye-line"></i>
+                </button>
+              </div>
+              <div class="product-meta-strip">
+                <span><i class="ri-fire-fill"></i> ${product.calories}</span>
+                <span><i class="ri-flashlight-fill"></i> ${product.caffeineMg} mg</span>
+                <span><i class="ri-star-fill"></i> ${product.rating}</span>
+              </div>
+            </div>
+
+            <div class="product-body">
+              <span class="product-cat-label">${product.category.replace("_", " ")}</span>
+              <h3 class="product-title">${product.title[state.lang]}</h3>
+              <p class="product-desc">${product.desc[state.lang]}</p>
+
+              <div class="size-selector">
+                <button class="size-pill ${sizeObj.label === 'S' ? 'active' : ''}" onclick="selectSize('${product.id}', 'S', -4000)">S (-4k)</button>
+                <button class="size-pill ${sizeObj.label === 'M' ? 'active' : ''}" onclick="selectSize('${product.id}', 'M', 0)">M (Standart)</button>
+                <button class="size-pill ${sizeObj.label === 'L' ? 'active' : ''}" onclick="selectSize('${product.id}', 'L', 6000)">L (+6k)</button>
+              </div>
+
+              <div class="product-footer">
+                <div>
+                  ${product.oldPrice ? `<span class="price-old">${formatUZS(product.oldPrice)}</span>` : ""}
+                  <span class="price-current">${formatUZS(finalPrice)}</span>
+                </div>
+                <button class="add-cart-btn" onclick="addToCart('${product.id}')">
+                  <i class="ri-shopping-bag-3-fill"></i>
+                  <span>${dict.add_to_cart}</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    /* ========================================================================
+       7. WISHLIST & CART + MACRO NUTRITION CALCULATOR
+       ======================================================================== */
+    function toggleWishlist(productId) {
+      const idx = state.wishlist.indexOf(productId);
+      const p = PRODUCTS_DB.find(x => x.id === productId);
+      if (idx > -1) {
+        state.wishlist.splice(idx, 1);
+        showToast(`💔 "${p.title[state.lang]}" saqlanganlardan o'chirildi`);
+      } else {
+        state.wishlist.push(productId);
+        showToast(`❤️ "${p.title[state.lang]}" saqlanganlarga qo'shildi!`);
+      }
+      localStorage.setItem("nb_wishlist", JSON.stringify(state.wishlist));
+      renderCatalog();
+      updateWishlistUI();
+    }
+
+    function updateWishlistUI() {
+      document.getElementById("wishlistBadge").textContent = state.wishlist.length;
+      const container = document.getElementById("wishlistItemsContainer");
+      if (state.wishlist.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color:var(--text-secondary); padding:40px 10px;">Saqlangan tovarlar yo‘q.</p>`;
+        return;
+      }
+      container.innerHTML = state.wishlist.map(id => {
+        const item = PRODUCTS_DB.find(p => p.id === id);
+        if (!item) return "";
+        return `
+          <div class="drawer-item">
+            <img src="${item.image}" alt="${item.title[state.lang]}" />
+            <div class="drawer-item-info">
+              <h5>${item.title[state.lang]}</h5>
+              <p>${formatUZS(item.price)}</p>
+            </div>
+            <button class="icon-btn" style="width:36px; height:36px;" onclick="addToCart('${item.id}')">
+              <i class="ri-shopping-cart-2-line"></i>
+            </button>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function moveAllWishlistToCart() {
+      state.wishlist.forEach(id => addToCart(id, false));
+      showToast("🛒 Barcha saqlanganlar savatga o'tkazildi!");
+      openDrawer("cartDrawer");
+    }
+
+    function addToCart(productId, notify = true) {
+      const p = PRODUCTS_DB.find(x => x.id === productId);
+      if (!p) return;
+      const sizeObj = state.selectedSizes[productId] || { label: "M", addPrice: 0 };
+      const unitPrice = p.price + sizeObj.addPrice;
+      const cartKey = `${productId}_${sizeObj.label}`;
+
+      const existing = state.cart.find(i => i.cartKey === cartKey);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push({
+          cartKey,
+          id: p.id,
+          title: p.title,
+          size: sizeObj.label,
+          price: unitPrice,
+          image: p.image,
+          qty: 1
+        });
+      }
+      localStorage.setItem("nb_cart", JSON.stringify(state.cart));
+      updateCartUI();
+      if (notify) showToast(`🛍 "${p.title[state.lang]} (${sizeObj.label})" savatga qo'shildi!`);
+    }
+
+    function changeCartQty(cartKey, delta) {
+      const idx = state.cart.findIndex(i => i.cartKey === cartKey);
+      if (idx === -1) return;
+      state.cart[idx].qty += delta;
+      if (state.cart[idx].qty <= 0) state.cart.splice(idx, 1);
+      localStorage.setItem("nb_cart", JSON.stringify(state.cart));
+      updateCartUI();
+    }
+
+    function calculateCartTotals() {
+      const subtotal = state.cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+      const discount = Math.round(subtotal * state.promoDiscountRate);
+      const delivery = subtotal === 0 ? 0 : subtotal >= 150000 ? 0 : 15000;
+      const total = Math.max(0, subtotal - discount + delivery);
+      return { subtotal, discount, delivery, total };
+    }
+
+    function updateCartUI() {
+      const totalCount = state.cart.reduce((s, i) => s + i.qty, 0);
+      document.getElementById("cartBadge").textContent = totalCount;
+      document.getElementById("macroItemCount").textContent = `${totalCount} ta mahsulot`;
+
+      // Calculate Live Macros
+      let totalKkal = 0;
+      let totalCaf = 0;
+      let totalProt = 0;
+
+      state.cart.forEach(item => {
+        const dbProd = PRODUCTS_DB.find(p => p.id === item.id);
+        const dbCombo = COMBOS_DB.find(c => c.id === item.id);
+        if (dbProd) {
+          const calVal = parseInt(dbProd.calories) || 0;
+          totalKkal += (calVal < 250 ? calVal : 0) * item.qty;
+          totalCaf += (dbProd.caffeineMg || 0) * item.qty;
+          totalProt += (dbProd.proteinG || 0) * item.qty;
+        } else if (dbCombo) {
+          totalKkal += dbCombo.calories * item.qty;
+          totalCaf += dbCombo.caffeine * item.qty;
+          totalProt += dbCombo.protein * item.qty;
+        }
+      });
+
+      document.getElementById("macroTotalCalories").textContent = `${totalKkal} kkal`;
+      document.getElementById("macroTotalCaffeine").textContent = `${totalCaf} mg`;
+      document.getElementById("macroTotalProtein").textContent = `${totalProt} g`;
+
+      const container = document.getElementById("cartItemsContainer");
+      if (state.cart.length === 0) {
+        container.innerHTML = `<p style="text-align:center; color:var(--text-secondary); padding:40px 10px;">Savatingiz bo‘sh.</p>`;
+      } else {
+        container.innerHTML = state.cart.map(item => {
+          const titleText = typeof item.title === "object" ? item.title[state.lang] : item.title;
+          return `
+            <div class="drawer-item">
+              <img src="${item.image}" alt="${titleText}" />
+              <div class="drawer-item-info">
+                <h5>${titleText} (${item.size})</h5>
+                <p>${formatUZS(item.price * item.qty)}</p>
+                <div class="qty-box">
+                  <button class="qty-btn" onclick="changeCartQty('${item.cartKey}', -1)">-</button>
+                  <span style="font-size:0.8rem; font-weight:700;">${item.qty}</span>
+                  <button class="qty-btn" onclick="changeCartQty('${item.cartKey}', 1)">+</button>
+                </div>
+              </div>
+              <button class="icon-btn" style="width:32px; height:32px; color:var(--danger);" onclick="changeCartQty('${item.cartKey}', -999)">
+                <i class="ri-close-line"></i>
+              </button>
+            </div>
+          `;
+        }).join("");
+      }
+
+      const { subtotal, discount, delivery, total } = calculateCartTotals();
+      document.getElementById("cartSubtotalText").textContent = formatUZS(subtotal);
+      document.getElementById("cartDiscountText").textContent = "-" + formatUZS(discount);
+      document.getElementById("cartDeliveryText").textContent = delivery === 0 && subtotal > 0 ? "BEPUL (0 UZS)" : formatUZS(delivery);
+      document.getElementById("cartTotalText").textContent = formatUZS(total);
+      document.getElementById("modalFinalPrice").textContent = formatUZS(total);
+    }
+
+    function copyPromoCode(code) {
+      navigator.clipboard?.writeText(code);
+      document.getElementById("promoCodeInput").value = code;
+      showToast(`🎁 Promo-kod "${code}" nusxalandi!`);
+    }
+
+    function applyPromoCode() {
+      const code = document.getElementById("promoCodeInput").value.trim().toUpperCase();
+      if (code === "AZ1K15" || code === "NOIR20") {
+        state.promoDiscountRate = code === "NOIR20" ? 0.20 : 0.15;
+        state.promoCodeName = code;
+        updateCartUI();
+        showToast(`✅ "${code}" chegirmasi faollashdi!`);
+      } else {
+        showToast("⚠️ Noto'g'ri promo-kod (AZ1K15 ni kiriting)");
+      }
+    }
+
+    /* ========================================================================
+       8. QUICK VIEW & TELEGRAM BOT API SUBMISSIONS
+       ======================================================================== */
+    function openQuickView(productId) {
+      const p = PRODUCTS_DB.find(x => x.id === productId);
+      if (!p) return;
+      document.getElementById("quickViewContent").innerHTML = `
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items:center;">
+          <img src="${p.image}" alt="${p.title[state.lang]}" style="border-radius:var(--radius-md); height:270px; width:100%;" />
+          <div>
+            <span class="badge-tag badge-hit">${p.category.toUpperCase()}</span>
+            <h3 style="font-family:var(--font-display); font-size:1.75rem; margin:8px 0;">${p.title[state.lang]}</h3>
+            <p style="color:var(--text-secondary); font-size:0.88rem; margin-bottom:14px;">${p.desc[state.lang]}</p>
+            <div style="display:flex; gap:12px; font-size:0.8rem; color:var(--accent-primary); margin-bottom:16px;">
+              <span>🔥 ${p.calories}</span>
+              <span>⚡ ${p.caffeineMg} mg kofein</span>
+              <span>🥩 ${p.proteinG}g oqsil</span>
+            </div>
+            <div style="font-size:1.35rem; font-weight:800; margin-bottom:16px;">${formatUZS(p.price)}</div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn-primary" onclick="addToCart('${p.id}'); closeAllDrawersAndModals();">Savatga qo'shish</button>
+              <button class="btn-outline" onclick="closeAllDrawersAndModals()">Yopish</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById("globalBackdrop").classList.add("active");
+      document.getElementById("quickViewModal").classList.add("active");
+    }
+
+    function openDrawer(id) {
+      closeAllDrawersAndModals();
+      document.getElementById("globalBackdrop").classList.add("active");
+      document.getElementById(id).classList.add("active");
+    }
+
+    function openCheckoutModal() {
+      if (state.cart.length === 0) {
+        showToast("⚠️ Savatingiz bo'sh!");
+        return;
+      }
+      closeAllDrawersAndModals();
+      document.getElementById("globalBackdrop").classList.add("active");
+      document.getElementById("checkoutModal").classList.add("active");
+    }
+
+    function closeAllDrawersAndModals() {
+      document.getElementById("globalBackdrop").classList.remove("active");
+      document.querySelectorAll(".drawer, .modal").forEach(el => el.classList.remove("active"));
+    }
+
+    async function sendToTelegramBot(text) {
+      const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CHAT_ID,
+          text,
+          parse_mode: "HTML"
+        })
+      });
+      return res.json();
+    }
+
+    async function submitOrderToTelegramBot(e) {
+      e.preventDefault();
+      const btn = document.getElementById("submitOrderBtn");
+      btn.disabled = true;
+      btn.innerHTML = "Yuborilmoqda...";
+
+      const name = document.getElementById("orderCustomerName").value.trim();
+      const phone = document.getElementById("orderCustomerPhone").value.trim();
+      const type = document.getElementById("orderType").value;
+      const pay = document.getElementById("orderPayment").value;
+      const addr = document.getElementById("orderAddress").value.trim();
+      const comm = document.getElementById("orderComment").value.trim() || "Yo'q";
+      const { subtotal, discount, delivery, total } = calculateCartTotals();
+      const orderId = "NB-" + Math.floor(100000 + Math.random() * 900000);
+
+      const itemsText = state.cart.map((i, idx) => {
+        const t = typeof i.title === "object" ? i.title.uz : i.title;
+        return `${idx + 1}. <b>${t}</b> (${i.size}) — ${i.qty} x ${formatUZS(i.price)}`;
+      }).join("\n");
+
+      const msg =
+`☕️ <b>KATALOGDAN YANGI BUYURTMA (menu.html)</b>
+🆔 <b>Buyurtma:</b> #${orderId}
+━━━━━━━━━━━━━━━━━━━━
+👤 <b>Mijoz:</b> ${name}
+📞 <b>Tel:</b> ${phone}
+🚚 <b>Usul:</b> ${type}
+📍 <b>Manzil:</b> ${addr}
+💳 <b>To'lov:</b> ${pay}
+💬 <b>Izoh:</b> ${comm}
+━━━━━━━━━━━━━━━━━━━━
+🛒 <b>TOVARLAR:</b>
+${itemsText}
+━━━━━━━━━━━━━━━━━━━━
+🔥 <b>JAMI TO'LOV: ${formatUZS(total)}</b>`;
+
+      try {
+        const res = await sendToTelegramBot(msg);
+        if (res.ok) {
+          state.cart = [];
+          localStorage.setItem("nb_cart", "[]");
+          updateCartUI();
+          closeAllDrawersAndModals();
+          e.target.reset();
+          showToast(`✅ Buyurtma #${orderId} Telegram botingizga tushdi!`);
+        } else {
+          showToast("⚠️ Xatolik yuz berdi!");
+        }
+      } catch (err) {
+        showToast("⚠️ Internet aloqasini tekshiring.");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = "Tasdiqlash va Telegram Botga Yuborish";
+      }
+    }
+
+    async function submitB2BRequestToTelegram(e) {
+      e.preventDefault();
+      const btn = document.getElementById("b2bSubmitBtn");
+      btn.disabled = true;
+
+      const comp = document.getElementById("b2bCompany").value.trim();
+      const phone = document.getElementById("b2bPhone").value.trim();
+      const vol = document.getElementById("b2bVolume").value;
+      const sample = document.getElementById("b2bSample").value;
+
+      const msg =
+`🏢 <b>YANGI B2B / OFIS QAHVA ARIZASI</b>
+━━━━━━━━━━━━━━━━━━━━
+🏛 <b>Kompaniya:</b> ${comp}
+📞 <b>Aloqa:</b> ${phone}
+📦 <b>Oylik hajm:</b> ${vol}
+🎁 <b>Degustatsiya:</b> ${sample}`;
+
+      try {
+        const res = await sendToTelegramBot(msg);
+        if (res.ok) {
+          e.target.reset();
+          showToast("✅ Korporativ arizangiz Telegram botga yuborildi!");
+        }
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function showToast(msg) {
+      const container = document.getElementById("toastContainer");
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.innerHTML = `<i class="ri-checkbox-circle-fill" style="color:var(--accent-primary);"></i> <span>${msg}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.remove(), 3300);
+    }
+  </script>
+</body>
+</html>
